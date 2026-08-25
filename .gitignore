@@ -1,0 +1,31 @@
+# Flutter and Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+coverage/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Apple
+.DS_Store
+DerivedData/
+Pods/
+
+# Android
+.gradle/
+local.properties
+
+# AI local configuration
+.claude/
+.codex/
+.agents/
