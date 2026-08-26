@@ -1,6 +1,6 @@
 # 01｜Flutter 是什么：先看清它能共享什么
 
-最后核验：2026-08-25
+最后核验：2026-08-26
 
 ## 本篇结论
 
@@ -14,6 +14,19 @@ Flutter 的核心价值不是“所有平台完全写一次”，而是让界面
 - 判断一段代码更可能属于共享层还是平台层。
 - 理解为什么“能运行”不等于“像这个平台的应用”。
 - 知道课程为什么选择 iOS 作为主讲平台。
+
+## 中国大陆环境提示
+
+本教程默认你在中国大陆学习和开发。后续章节不会假设你已经具备稳定的国际网络、Google Play 服务、境外手机号或海外支付方式。
+
+这会影响的不只是 Flutter SDK 下载，还包括：
+
+- Dart 和原生依赖能否稳定获取。
+- 地图、推送、登录、支付和统计服务能否在大陆设备正常使用。
+- Android 应用是否依赖 Google Play 服务。
+- iOS、Android、鸿蒙分别通过什么渠道测试和分发。
+
+课程会优先给出大陆可执行路径，再说明海外环境差异。具体服务仍以官方文档、维护状态和实际验证为准，不会因为“国内可用”就默认选择某个厂商。
 
 ## 01 Flutter 解决的是什么问题
 
@@ -139,3 +152,4 @@ iOS 作为主线有三个实际好处：
 - [Flutter 官方主页](https://flutter.dev/) 。
 - [Flutter 平台集成概览](https://docs.flutter.dev/platform-integration) 。
 - [Flutter 平台自动适配](https://docs.flutter.dev/ui/adaptive-responsive/platform-adaptations) 。
+- [在中国网络环境下使用 Flutter](https://docs.flutter.dev/community/china) 。

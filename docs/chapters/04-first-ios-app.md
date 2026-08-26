@@ -1,6 +1,6 @@
 # 04｜运行第一个 iOS 应用
 
-最后核验：2026-08-25
+最后核验：2026-08-26
 
 ## 本篇结论
 
@@ -12,6 +12,28 @@
 - 在指定 iOS Simulator 上运行应用。
 - 区分热重载、热重启和完整重启。
 - 使用 `flutter analyze` 和 `flutter test` 做第一次验证。
+
+## 本篇验证环境
+
+以下步骤已于 2026-08-26 实际执行通过：
+
+- macOS 26.5.2。
+- Flutter 3.47.0 stable。
+- Dart 3.13.0。
+- Xcode 26.6。
+- iOS 26.5 iPhone 17 Pro Simulator。
+
+通过的命令包括：
+
+```bash
+flutter create --platforms=ios,android spark_app
+flutter analyze
+flutter test
+flutter build ios --simulator
+flutter run -d <device-id>
+```
+
+应用在 Simulator 启动后，终端热重载命令 `r` 执行成功。
 
 ## 01 创建练习项目
 
@@ -157,6 +179,12 @@ flutter build ios --simulator
 - 不手工创建 `ohos` 目录。
 
 下一阶段会先解释项目结构和工具链边界，再把默认应用逐步改造成 `Spark`。
+
+## 中国大陆环境提示
+
+第一次执行 `flutter run`、`flutter test` 或 `flutter build` 时，Flutter 可能继续下载 Dart 包和构建产物。通过终端启动时，会读取当前终端中的镜像环境变量；通过 VS Code 启动时，应在设置变量后重启 VS Code，避免编辑器继续使用旧环境。
+
+如果出现 GitHub、`storage.googleapis.com` 或 `pub.dev` 连接超时，回到 [第 03 课](03-macos-ios-setup.md) 的“中国大陆网络环境”小节，选择合规网络条件或可信镜像。不要一边切换代理、一边切换镜像再同时清理缓存，否则无法判断真正生效的是哪一步。
 
 ## 常见问题
 

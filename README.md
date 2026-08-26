@@ -4,6 +4,12 @@
 
 教程不会把三端包装成完全等价的一键构建：iOS、Android 使用 Flutter 上游稳定版，鸿蒙使用独立维护的 Flutter-OH。课程围绕同一个实战应用，讲清楚共享代码、平台差异、插件兼容和三端验证。
 
+## 默认读者
+
+教程默认读者位于中国大陆，使用中文操作系统和大陆常见网络环境。课程不会默认你拥有稳定的国际网络、Google Play 服务、境外手机号、境外支付方式或海外开发者账号。
+
+遇到 Flutter 下载、依赖、地图、推送、登录、支付、统计和应用分发时，教程会优先给出中国大陆可执行路径，并明确海外方案的适用条件。镜像与第三方替代服务只采用可信来源，并标注维护方和最后核验日期。
+
 ## 当前状态
 
 项目处于第一阶段：课程规范与入门章节建设。真实进度见 [ROADMAP.md](ROADMAP.md) 。
@@ -32,6 +38,7 @@
 涉及平台支持、工具链和命令时，优先使用以下一手资料：
 
 - [Flutter 官方文档](https://docs.flutter.dev/) 。
+- [Flutter 中文开发者文档](https://docs.flutter.cn/) 。
 - [Apple Developer Documentation](https://developer.apple.com/documentation/) 。
 - [CPF-Flutter](https://gitcode.com/CPF-Flutter) 。
 

@@ -1,6 +1,6 @@
 # 课程蓝图
 
-最后核验：2026-08-25
+最后核验：2026-08-26
 
 ## 课程目标
 
@@ -12,6 +12,19 @@
 - Android：每个阶段验证核心流程，最终完成 APK／AAB 构建。
 - 鸿蒙：使用 Flutter-OH 完成 HAP 构建与核心流程真机验证。
 - 共享层：Dart 业务逻辑只维护一份，并在两条 SDK 轨道上通过测试。
+
+## 默认学习环境
+
+教程默认读者位于中国大陆，并据此设计主路径：
+
+- 不假设读者具有稳定的国际网络访问条件。
+- 不假设设备提供 Google Play 服务。
+- 不假设读者拥有境外手机号、境外支付方式或海外开发者账号。
+- Flutter SDK、Dart 包和原生构建产物必须提供可信下载来源与网络排查方法。
+- 地图、推送、登录、支付、统计和云服务先验证大陆可用方案，再说明海外方案。
+- 应用分发分别讨论 App Store 中国大陆区、国内 Android 渠道与华为生态，不用 Google Play 代表全部 Android 发布流程。
+
+“中国大陆优先”不等于只写国产服务。选择依据仍是可用性、维护状态、隐私与合规要求、三端兼容性和可验证结果。
 
 ## 课程结构
 
@@ -25,8 +38,8 @@
 ### 第二部分：补齐开发环境
 
 5. VS Code／Android Studio 的 Flutter 开发配置
-6. Android SDK、模拟器与第一次 Android 构建
-7. DevEco Studio 与 Flutter-OH 环境
+6. 中国大陆环境下配置 Android SDK、模拟器与第一次 Android 构建
+7. DevEco Studio、Flutter-OH 与大陆下载环境
 8. 两条 SDK 轨道：上游 Flutter 与 Flutter-OH 如何切换
 9. 认识 Flutter 项目：`lib`、`ios`、`android`、`ohos` 和 `pubspec.yaml`
 
@@ -56,7 +69,7 @@
 25. 路由、页面参数、返回结果和 Deep Link
 26. 数据模型、Repository 与业务层
 27. 本地持久化和数据迁移边界
-28. 网络请求、序列化、超时和错误处理
+28. 网络请求、国内外服务可达性、序列化与错误处理
 29. 加载、空数据、失败与重试状态
 
 ### 第六部分：三端适配专题
@@ -65,14 +78,14 @@
 31. iOS 体验精修：返回手势、安全区、Tab、弹窗和触觉
 32. Android 适配：系统返回、Material 行为和权限
 33. 鸿蒙适配：`ohos` 工程、构建流程和 ArkTS 桥接
-34. 插件兼容矩阵：纯 Dart、官方插件、社区插件和自建适配
+34. 插件与服务兼容矩阵：三端支持、GMS 依赖和自建适配
 35. Platform Channel：Swift、Kotlin、ArkTS 三端最小实现
 
 ### 第七部分：质量与工程化
 
 36. 单元测试、Widget 测试和关键流程测试
 37. 性能分析：构建、重绘、列表和图片
-38. 三端构建、签名、发布前检查与故障排查
+38. 三端构建、签名、国内分发与发布前检查
 
 ## 贯穿项目：Spark
 
@@ -116,9 +129,10 @@ Flutter 官方支持列表包含 iOS 与 Android，不包含 OpenHarmony。Flutt
 4. 最小可运行步骤。
 5. 预期结果。
 6. 三端差异。
-7. 常见问题。
-8. 完成检查。
-9. 一手来源和核验日期。
+7. 中国大陆环境提示。
+8. 常见问题。
+9. 完成检查。
+10. 一手来源和核验日期。
 
 ## 主要来源
 
@@ -126,5 +140,7 @@ Flutter 官方支持列表包含 iOS 与 Android，不包含 OpenHarmony。Flutt
 - [Flutter 自适应与响应式设计](https://docs.flutter.dev/ui/adaptive-responsive) 。
 - [Flutter 平台自动适配](https://docs.flutter.dev/ui/adaptive-responsive/platform-adaptations) 。
 - [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) 。
+- [在中国网络环境下使用 Flutter](https://docs.flutter.dev/community/china) 。
+- [Flutter 中文开发者文档](https://docs.flutter.cn/) 。
 - [CPF-Flutter](https://gitcode.com/CPF-Flutter) 。
 - [参考课程组织方式](https://github.com/stormzhang/ai-coding-guide) 。

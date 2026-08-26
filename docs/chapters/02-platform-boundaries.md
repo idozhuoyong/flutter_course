@@ -1,6 +1,6 @@
 # 02｜三端支持边界：不是同一条轨道
 
-最后核验：2026-08-25
+最后核验：2026-08-26
 
 ## 本篇结论
 
@@ -37,8 +37,6 @@ Flutter 官方支持平台页面列出了 iOS 与 Android，并给出对应系�
 - OpenHarmony 问题需要继续检查 Flutter-OH 的版本、文档、Issue 和插件适配。
 - 上游 Flutter 新功能不能默认认为已经进入 Flutter-OH。
 
-截至本篇核验日期，Flutter 官方文档以 3.44.7 为基线；CPF-Flutter 公布的 Flutter-OH 最新稳定版本为 3.41.9，3.44 适配仍在其版本规划中。版本会继续变化，因此后续创建工程时还会重新核验并锁定。
-
 ## 03 两条 SDK 轨道
 
 本教程采用下面的构建关系：
@@ -71,18 +69,9 @@ Flutter-OH
 
 举例：如果 Flutter 上游版本比 Flutter-OH 更新，就不能因为上游已经提供某个 API，直接在共享代码里使用它。应该先确认 Flutter-OH 对应版本是否存在该 API。
 
-课程后续会维护这样的版本表：
-
-| 项目 | iOS／Android | 鸿蒙 | 状态 |
-|---|---|---|---|
-| Flutter SDK | 待创建工程时锁定 | 待创建工程时锁定 | 待确认 |
-| Dart SDK 范围 | 取两端交集 | 取两端交集 | 待确认 |
-| Xcode | 与 Flutter 基线匹配 | 不适用 | 待确认 |
-| DevEco Studio | 不适用 | 与 Flutter-OH 基线匹配 | 待确认 |
-
 ## 05 插件是最大的现实差异
 
-纯 Dart 包通常最容易跨平台。只要没有调用平台 API，并且 Dart 版本兼容，就有较高概率直接复用。
+纯 Dart 包不包含 iOS、Android 或 OpenHarmony 的原生实现，但仍然要核对它声明的 Dart SDK 范围，并在两条 SDK 轨道分别运行测试。只有两边测试都通过，课程才把它列为共享依赖。
 
 插件则需要逐项确认：
 
@@ -94,7 +83,19 @@ Flutter-OH
 
 课程不会用“pub.dev 能安装”代替“鸿蒙可用”。每个原生能力都会进入插件兼容矩阵。
 
-## 06 什么才算支持鸿蒙
+## 06 中国大陆环境提示
+
+Android 能构建，不代表依赖 Google Play 服务的功能能在大陆常见设备环境中工作。本课程选择插件和云服务时，会把下面几件事分开验证：
+
+- Flutter 插件是否支持 Android。
+- 插件是否强依赖 Google Play 服务。
+- 没有 Google Play 服务时，核心功能是否可用或能够降级。
+- 是否需要国内厂商 SDK，以及该 SDK 是否继续支持 iOS、Android 和鸿蒙目标。
+- 服务账号、控制台、短信、支付或应用商店是否对大陆开发者提供可执行的注册路径。
+
+因此，后续的“Android 支持”表示 Android 应用本身通过验证，不等于默认接入 Google Play；“三端支持”也不会只检查 Dart 层能否编译。
+
+## 07 什么才算支持鸿蒙
 
 至少满足以下条件，课程才会把功能标记成“已支持”：
 
@@ -114,7 +115,7 @@ Flutter-OH
 
 ### 能否只安装 Flutter-OH，然后构建三个平台
 
-技术上某些分支可能保留其他平台代码，但本课程不采用这种方式。iOS、Android 使用上游 Flutter，鸿蒙使用 Flutter-OH，能降低版本滞后对官方平台的影响。
+本课程不采用这种方式。按照课程命令操作时，iOS、Android 使用上游 Flutter，鸿蒙使用 Flutter-OH；每次构建前都要核对实际生效的 SDK 路径和版本。
 
 ### 三端界面是否应该完全一致
 
@@ -132,3 +133,4 @@ Flutter-OH
 - [Flutter 支持平台](https://docs.flutter.dev/reference/supported-platforms) 。
 - [CPF-Flutter](https://gitcode.com/CPF-Flutter) 。
 - [Flutter-OH SDK 仓库](https://gitcode.com/CPF-Flutter/flutter_flutter) 。
+- [在中国网络环境下使用 Flutter](https://docs.flutter.dev/community/china) 。

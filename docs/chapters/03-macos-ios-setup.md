@@ -1,6 +1,6 @@
 # 03｜搭建 macOS 与 iOS 开发环境
 
-最后核验：2026-08-25
+最后核验：2026-08-26
 
 ## 本篇结论
 
@@ -58,7 +58,70 @@ xcodebuild -downloadPlatform iOS
 
 ## 02 安装 Flutter stable
 
-从 Flutter 官方安装页下载适合当前 Mac 架构的 stable SDK。Apple Silicon 机器选择 ARM64，Intel Mac 选择 x64。
+Flutter 官方提供两种安装方式：通过 VS Code 自动下载，或者手动下载 SDK。第一次接触 Flutter，推荐使用 VS Code；需要固定 SDK 版本或明确控制安装目录时，再使用手动方式。
+
+官方入口：
+
+- [Flutter 安装首页](https://docs.flutter.dev/install) 。
+- [使用 VS Code 安装 Flutter](https://docs.flutter.dev/install/with-vs-code) 。
+- [手动安装 Flutter SDK](https://docs.flutter.dev/install/manual) 。
+- [Flutter SDK 历史版本下载](https://docs.flutter.dev/install/archive) 。
+
+两种方式只选一种。不要先通过 VS Code 安装，再手动下载第二套 SDK，否则终端与编辑器可能指向不同版本。
+
+### 中国大陆网络环境：什么时候需要“魔法”
+
+下载 Flutter 时可能需要访问 GitHub、`storage.googleapis.com` 和 `pub.dev`。如果出现下面这些现象，先考虑网络链路问题，不要反复删除和重装 SDK：
+
+- VS Code 长时间停在 `Clone Flutter` 或 `Downloading the Flutter SDK`。
+- SDK 压缩包下载失败或速度长期为零。
+- `flutter doctor`、`flutter precache` 或 `flutter pub get` 持续超时。
+- 错误信息明确包含域名解析失败、连接超时或连接被重置。
+
+有合规、可信且稳定的国际网络访问条件时，可以先使用它完成安装。本教程不推荐具体代理工具，也不要求把代理永久写进系统配置。
+
+没有这类网络条件时，可以使用 Flutter 官方文档列出的中国社区镜像。先在当前终端临时设置：
+
+```bash
+export PUB_HOSTED_URL="https://pub.flutter-io.cn"
+export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
+```
+
+然后在同一个终端重新执行 Flutter 下载或验证命令。确认镜像在当前网络中稳定后，再把这两行加入 `~/.zprofile`；没有确认前不要永久配置。
+
+镜像与“魔法”不是同一件事：前者切换 Flutter 包和构建产物的下载源，后者改变网络访问路径。二者通常选择一种即可，叠加使用会让故障来源更难判断。
+
+需要注意：这些镜像由社区分别维护，可能存在同步延迟、暂时不可用或版本缺失。只使用 Flutter 文档列出的可信镜像；课程正式锁定 SDK 版本时，还要核对版本号、架构和下载来源。
+
+### 方法一：通过 VS Code 安装（推荐）
+
+先安装 [Visual Studio Code](https://code.visualstudio.com/download) ，然后按下面的步骤操作：
+
+1. 启动 VS Code。
+2. 安装 [Flutter 扩展](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) 。Flutter 扩展会同时安装 Dart 扩展。
+3. 按 `Command + Shift + P` 打开命令面板。
+4. 输入并选择 `Flutter: New Project`。
+5. VS Code 询问 Flutter SDK 位置时，选择 `Download SDK`。
+6. 选择一个长期保留、路径简单且当前用户可写的父目录，例如 `~/development`。
+7. 点击 `Clone Flutter`，等待 SDK 下载完成。
+8. 点击 `Add SDK to PATH`。
+9. 关闭所有终端窗口并重启 VS Code，让新的 `PATH` 生效。
+
+这一步只是借助“新建项目”命令触发 SDK 安装。SDK 安装完成后可以先退出项目创建流程；第 04 课会统一创建课程项目。
+
+验证：
+
+```bash
+flutter --version
+```
+
+如果命令能输出 Flutter、Engine、Dart 和 DevTools 的版本信息，说明 SDK 与 `PATH` 已经接通。
+
+### 方法二：手动下载安装
+
+打开 [Flutter 手动安装页面](https://docs.flutter.dev/install/manual) ，下载适合当前 Mac 架构的 stable SDK。Apple Silicon 机器选择 ARM64；Intel Mac 选择 x64。需要安装指定旧版本时，从 [Flutter SDK Archive](https://docs.flutter.dev/install/archive) 下载。
+
+Flutter 已开始逐步停止支持 Intel Mac。使用 Intel Mac 的读者应先在官方支持平台页面核对当前版本状态，不要默认最新版仍然提供 x64 构建。
 
 把压缩包解压到一个长期保留、路径简单且当前用户可写的位置。不要放在临时目录，也不要放进需要管理员权限才能修改的系统目录。
 
@@ -68,7 +131,7 @@ xcodebuild -downloadPlatform iOS
 /Users/your_name/development/flutter
 ```
 
-在 `~/.zshrc` 加入：
+在 `~/.zprofile` 加入：
 
 ```bash
 export PATH="/Users/your_name/development/flutter/bin:$PATH"
@@ -77,7 +140,7 @@ export PATH="/Users/your_name/development/flutter/bin:$PATH"
 把 `your_name` 和路径替换为真实值。保存后重新打开终端，或者在当前终端执行：
 
 ```bash
-source ~/.zshrc
+source ~/.zprofile
 ```
 
 验证：
@@ -143,7 +206,9 @@ Found 1 connected device:
 
 ### `flutter` 提示 command not found
 
-先检查 SDK 路径是否真实存在：
+如果通过 VS Code 安装，先完全退出并重新打开 VS Code 与终端。仍然无效时，根据 Flutter 扩展的 `Locate SDK` 提示重新选择刚下载的 `flutter` 目录。
+
+如果通过手动方式安装，先检查 SDK 路径是否真实存在：
 
 ```bash
 ls /Users/your_name/development/flutter/bin/flutter
@@ -181,6 +246,12 @@ which flutter
 ## 一手来源
 
 - [安装 Flutter](https://docs.flutter.dev/install) 。
+- [使用 VS Code 安装 Flutter](https://docs.flutter.dev/install/with-vs-code) 。
+- [手动安装 Flutter SDK](https://docs.flutter.dev/install/manual) 。
+- [将 Flutter 添加到 PATH](https://docs.flutter.dev/install/add-to-path) 。
+- [Flutter 支持平台与 Intel Mac 说明](https://docs.flutter.dev/reference/supported-platforms) 。
+- [在中国网络环境下使用 Flutter](https://docs.flutter.dev/community/china) 。
+- [Flutter 中文社区镜像说明](https://docs.flutter.cn/community/china/) 。
 - [配置 iOS 开发环境](https://docs.flutter.dev/platform-integration/ios/setup) 。
 - [Flutter CLI 参考](https://docs.flutter.dev/reference/flutter-cli) 。
 - [Flutter 的 Swift Package Manager 说明](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers) 。
