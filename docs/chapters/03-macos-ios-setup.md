@@ -72,6 +72,7 @@ Flutter 官方提供两种安装方式：通过 VS Code 自动下载，或者手
 ### 中国大陆网络环境：什么时候需要“魔法”
 
 人工批注：去除环境特别提示
+人工批注结束
 
 下载 Flutter 时可能需要访问 GitHub、`storage.googleapis.com` 和 `pub.dev`。如果出现下面这些现象，先考虑网络链路问题，不要反复删除和重装 SDK：
 
@@ -98,6 +99,7 @@ export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 ### 方法一：通过 VS Code 安装（推荐）
 
 人工批注：提示无魔法跑不通
+人工批注结束
 
 先安装 [Visual Studio Code](https://code.visualstudio.com/download) ，然后按下面的步骤操作：
 
@@ -124,6 +126,7 @@ flutter --version
 ### 方法二：手动下载安装
 
 人工批注：无魔法可以下载（Mac下载链接：https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.47.1-stable.zip）
+人工批注结束
 
 打开 [Flutter 手动安装页面](https://docs.flutter.dev/install/manual) ，下载适合当前 Mac 架构的 stable SDK。Apple Silicon 机器选择 ARM64；Intel Mac 选择 x64。需要安装指定旧版本时，从 [Flutter SDK Archive](https://docs.flutter.dev/install/archive) 下载。
 

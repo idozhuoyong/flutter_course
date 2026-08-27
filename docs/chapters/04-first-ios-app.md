@@ -39,6 +39,9 @@ flutter run -d <device-id>
 
 选择一个用于练习的父目录，然后运行：
 
+人工批注：需要网络
+人工批注结束
+
 ```bash
 flutter create --platforms=ios,android spark_app
 cd spark_app
@@ -101,6 +104,10 @@ flutter run -d <device-id>
 ```dart
 title: 'Spark',
 ```
+
+人工批注：这里的标题，在 iOS 模拟器中看不到，首次验证修改Flutter Demo Home Page来完成第一次热重载
+
+人工批注结束
 
 保存文件。如果编辑器已启用保存时热重载，Simulator 会自动更新；否则在运行 `flutter run` 的终端按：
 
@@ -181,6 +188,9 @@ flutter build ios --simulator
 下一阶段会先解释项目结构和工具链边界，再把默认应用逐步改造成 `Spark`。
 
 ## 中国大陆环境提示
+
+人工批注：去除环境特别提示
+人工批注结束
 
 第一次执行 `flutter run`、`flutter test` 或 `flutter build` 时，Flutter 可能继续下载 Dart 包和构建产物。通过终端启动时，会读取当前终端中的镜像环境变量；通过 VS Code 启动时，应在设置变量后重启 VS Code，避免编辑器继续使用旧环境。
 
