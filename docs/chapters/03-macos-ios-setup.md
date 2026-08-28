@@ -1,6 +1,6 @@
 # 03｜搭建 macOS 与 iOS 开发环境
 
-最后核验：2026-08-26
+最后核验：2026-08-28
 
 ## 本篇结论
 
@@ -58,7 +58,7 @@ xcodebuild -downloadPlatform iOS
 
 ## 02 安装 Flutter stable
 
-Flutter 官方提供两种安装方式：通过 VS Code 自动下载，或者手动下载 SDK。第一次接触 Flutter，推荐使用 VS Code；需要固定 SDK 版本或明确控制安装目录时，再使用手动方式。
+Flutter 官方提供两种安装方式：通过 VS Code 克隆 SDK，或者手动下载 SDK 压缩包。当前网络能稳定访问 GitHub 时，可以使用 VS Code；无法访问 GitHub 时，改用官方压缩包或 Flutter 官方文档列出的可信镜像。
 
 官方入口：
 
@@ -69,37 +69,7 @@ Flutter 官方提供两种安装方式：通过 VS Code 自动下载，或者手
 
 两种方式只选一种。不要先通过 VS Code 安装，再手动下载第二套 SDK，否则终端与编辑器可能指向不同版本。
 
-### 中国大陆网络环境：什么时候需要“魔法”
-
-人工批注：去除环境特别提示
-人工批注结束
-
-下载 Flutter 时可能需要访问 GitHub、`storage.googleapis.com` 和 `pub.dev`。如果出现下面这些现象，先考虑网络链路问题，不要反复删除和重装 SDK：
-
-- VS Code 长时间停在 `Clone Flutter` 或 `Downloading the Flutter SDK`。
-- SDK 压缩包下载失败或速度长期为零。
-- `flutter doctor`、`flutter precache` 或 `flutter pub get` 持续超时。
-- 错误信息明确包含域名解析失败、连接超时或连接被重置。
-
-有合规、可信且稳定的国际网络访问条件时，可以先使用它完成安装。本教程不推荐具体代理工具，也不要求把代理永久写进系统配置。
-
-没有这类网络条件时，可以使用 Flutter 官方文档列出的中国社区镜像。先在当前终端临时设置：
-
-```bash
-export PUB_HOSTED_URL="https://pub.flutter-io.cn"
-export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
-```
-
-然后在同一个终端重新执行 Flutter 下载或验证命令。确认镜像在当前网络中稳定后，再把这两行加入 `~/.zprofile`；没有确认前不要永久配置。
-
-镜像与“魔法”不是同一件事：前者切换 Flutter 包和构建产物的下载源，后者改变网络访问路径。二者通常选择一种即可，叠加使用会让故障来源更难判断。
-
-需要注意：这些镜像由社区分别维护，可能存在同步延迟、暂时不可用或版本缺失。只使用 Flutter 文档列出的可信镜像；课程正式锁定 SDK 版本时，还要核对版本号、架构和下载来源。
-
-### 方法一：通过 VS Code 安装（推荐）
-
-人工批注：提示无魔法跑不通
-人工批注结束
+### 方法一：通过 VS Code 安装（需要访问 GitHub）
 
 先安装 [Visual Studio Code](https://code.visualstudio.com/download) ，然后按下面的步骤操作：
 
@@ -113,6 +83,8 @@ export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 8. 点击 `Add SDK to PATH`。
 9. 关闭所有终端窗口并重启 VS Code，让新的 `PATH` 生效。
 
+`Clone Flutter` 需要当前网络能够访问 GitHub。无法访问时，这条路径会停在克隆或下载阶段，应改用下面的手动下载方式，不要反复删除已经生成的目录。
+
 这一步只是借助“新建项目”命令触发 SDK 安装。SDK 安装完成后可以先退出项目创建流程；第 04 课会统一创建课程项目。
 
 验证：
@@ -125,10 +97,11 @@ flutter --version
 
 ### 方法二：手动下载安装
 
-人工批注：无魔法可以下载（Mac下载链接：https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.47.1-stable.zip）
-人工批注结束
-
 打开 [Flutter 手动安装页面](https://docs.flutter.dev/install/manual) ，下载适合当前 Mac 架构的 stable SDK。Apple Silicon 机器选择 ARM64；Intel Mac 选择 x64。需要安装指定旧版本时，从 [Flutter SDK Archive](https://docs.flutter.dev/install/archive) 下载。
+
+截至 2026-08-28，Flutter 官方 macOS 版本清单中的 stable 版本是 3.47.2。Apple Silicon 可以直接下载 [Flutter 3.47.2 stable ARM64](https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.47.2-stable.zip) ；该地址已验证返回官方 ZIP 文件。Intel Mac 不要使用这个 ARM64 压缩包。
+
+如果 `storage.googleapis.com` 在当前网络中无法下载，可以按照 [Flutter 官方中国网络文档](https://docs.flutter.dev/community/china) 的说明，将下载地址中的域名替换为可信镜像域名。镜像可能存在同步延迟或版本缺失，下载后仍要核对文件名中的版本与架构。
 
 Flutter 已开始逐步停止支持 Intel Mac。使用 Intel Mac 的读者应先在官方支持平台页面核对当前版本状态，不要默认最新版仍然提供 x64 构建。
 
@@ -164,16 +137,14 @@ flutter --version
 
 运行：
 
-人工批注：需要网络
-
-无魔法需要配置镜像
+`flutter doctor -v` 在首次检查时可能继续获取 Dart 包或 Flutter 构建产物，需要可用的网络连接。没有配置其他可用下载路径时，先按 Flutter 官方中国网络文档在当前终端设置镜像：
 
 ```bash
 export PUB_HOSTED_URL="https://pub.flutter-io.cn"
 export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 ```
 
-人工批注结束
+环境变量只对当前终端及其子进程生效。设置后在同一个终端运行：
 
 ```bash
 flutter doctor -v
@@ -188,6 +159,8 @@ flutter doctor -v
 - 能看到 iOS 相关环境。
 
 Android toolchain 还没有配置时出现警告是预期现象，不要为了让所有标记立刻变绿而跳到后续章节。
+
+如果命令持续超时，先根据报错中的域名判断是包源、构建产物源还是其他服务不可达，不要同时切换多个下载路径并清理缓存。
 
 ## 04 启动 iOS Simulator
 

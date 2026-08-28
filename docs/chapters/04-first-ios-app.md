@@ -1,6 +1,6 @@
 # 04｜运行第一个 iOS 应用
 
-最后核验：2026-08-26
+最后核验：2026-08-28
 
 ## 本篇结论
 
@@ -39,8 +39,7 @@ flutter run -d <device-id>
 
 选择一个用于练习的父目录，然后运行：
 
-人工批注：需要网络
-人工批注结束
+`flutter create` 默认会解析项目依赖，首次运行和构建还可能下载 Dart 包与 Flutter 构建产物，因此需要可用的网络连接。如果第 03 课使用了镜像环境变量，请在同一个终端继续执行：
 
 ```bash
 flutter create --platforms=ios,android spark_app
@@ -99,15 +98,17 @@ flutter run -d <device-id>
 
 ## 03 完成第一次热重载
 
-打开 `lib/main.dart`，找到页面标题或首页中的可见文字，把它改成：
+打开 `lib/main.dart`，找到下面这行：
 
 ```dart
-title: 'Spark',
+home: const MyHomePage(title: 'Flutter Demo Home Page'),
 ```
 
-人工批注：这里的标题，在 iOS 模拟器中看不到，首次验证修改Flutter Demo Home Page来完成第一次热重载
+将模拟器中可见的页面标题改成：
 
-人工批注结束
+```dart
+home: const MyHomePage(title: 'Spark'),
+```
 
 保存文件。如果编辑器已启用保存时热重载，Simulator 会自动更新；否则在运行 `flutter run` 的终端按：
 
@@ -187,15 +188,6 @@ flutter build ios --simulator
 
 下一阶段会先解释项目结构和工具链边界，再把默认应用逐步改造成 `Spark`。
 
-## 中国大陆环境提示
-
-人工批注：去除环境特别提示
-人工批注结束
-
-第一次执行 `flutter run`、`flutter test` 或 `flutter build` 时，Flutter 可能继续下载 Dart 包和构建产物。通过终端启动时，会读取当前终端中的镜像环境变量；通过 VS Code 启动时，应在设置变量后重启 VS Code，避免编辑器继续使用旧环境。
-
-如果出现 GitHub、`storage.googleapis.com` 或 `pub.dev` 连接超时，回到 [第 03 课](03-macos-ios-setup.md) 的“中国大陆网络环境”小节，选择合规网络条件或可信镜像。不要一边切换代理、一边切换镜像再同时清理缓存，否则无法判断真正生效的是哪一步。
-
 ## 常见问题
 
 ### `flutter run` 选错了设备
@@ -208,16 +200,16 @@ flutter build ios --simulator
 
 ### `flutter test` 因找不到原来的文字而失败
 
-如果你修改了默认计数器页面中测试依赖的文字，需要同步理解并更新测试预期。第一篇练习建议只改 `MaterialApp` 的 `title`，避免无意破坏默认测试。
+默认 Widget 测试检查计数器的 `0` 和 `1`，本篇只修改 `MyHomePage` 的标题，不会改变这些测试预期。如果你继续修改了计数器数字、按钮或测试依赖的其他内容，需要同步理解并更新测试。
 
 ### iOS 构建卡在首次下载
 
-首次运行可能需要下载构建产物。保留完整终端输出，先确认是持续下载还是已经出现网络错误；不要反复中断并重新开始。
+首次运行可能需要下载构建产物。保留完整终端输出，先确认是持续下载还是已经出现网络错误；如果错误指向包或构建产物下载源，回到 [第 03 课](03-macos-ios-setup.md) 的 Flutter 安装与镜像配置步骤检查，不要反复中断并重新开始。
 
 ## 完成检查
 
 - [ ] `flutter run -d <device-id>` 能在 iOS Simulator 启动应用。
-- [ ] 修改 `title` 后能通过热重载看到变化。
+- [ ] 将 `Flutter Demo Home Page` 改为 `Spark` 后，能通过热重载在 Simulator 中看到变化。
 - [ ] 我能解释 `r`、`R` 和完整重启的区别。
 - [ ] `flutter analyze` 通过。
 - [ ] `flutter test` 通过。
