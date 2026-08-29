@@ -33,6 +33,8 @@
 - 图片附件、通知和 Deep Link。
 - iOS 体验精修、Android 适配和 Flutter-OH 适配。
 
+首个可运行基线位于 [`app/`](app/) ，当前使用 Flutter 3.47.2 stable。
+
 ## 事实来源
 
 涉及平台支持、工具链和命令时，优先使用以下一手资料：

@@ -1,6 +1,6 @@
 # 03｜搭建 macOS 与 iOS 开发环境
 
-最后核验：2026-08-28
+最后核验：2026-08-29
 
 ## 本篇结论
 
@@ -99,7 +99,7 @@ flutter --version
 
 打开 [Flutter 手动安装页面](https://docs.flutter.dev/install/manual) ，下载适合当前 Mac 架构的 stable SDK。Apple Silicon 机器选择 ARM64；Intel Mac 选择 x64。需要安装指定旧版本时，从 [Flutter SDK Archive](https://docs.flutter.dev/install/archive) 下载。
 
-截至 2026-08-28，Flutter 官方 macOS 版本清单中的 stable 版本是 3.47.2。Apple Silicon 可以直接下载 [Flutter 3.47.2 stable ARM64](https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.47.2-stable.zip) ；该地址已验证返回官方 ZIP 文件。Intel Mac 不要使用这个 ARM64 压缩包。
+截至 2026-08-29，Flutter 官方 macOS 版本清单中的 stable 版本是 3.47.2。Apple Silicon 可以直接下载 [Flutter 3.47.2 stable ARM64](https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.47.2-stable.zip) ；该地址已验证返回官方 ZIP 文件。Intel Mac 不要使用这个 ARM64 压缩包。
 
 如果 `storage.googleapis.com` 在当前网络中无法下载，可以按照 [Flutter 官方中国网络文档](https://docs.flutter.dev/community/china) 的说明，将下载地址中的域名替换为可信镜像域名。镜像可能存在同步延迟或版本缺失，下载后仍要核对文件名中的版本与架构。
 
@@ -188,6 +188,12 @@ Found 1 connected device:
 ```
 
 具体机型、ID 和系统版本取决于你的本机，不需要与示意内容完全相同。
+
+下图汇总了本课验证环境中的实际命令输出：
+
+![Flutter、Xcode 与 iOS Simulator 环境检查输出](../../assets/screenshots/03-setup/03-toolchain-check.png)
+
+图中使用 Flutter 3.47.2、Dart 3.13.2 和 iOS 26.5 iPhone 17 Pro Simulator。终端输出图只保留与本课检查目标直接相关的行。
 
 ## 05 CocoaPods 与 Swift Package Manager
 

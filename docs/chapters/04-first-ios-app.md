@@ -1,6 +1,6 @@
 # 04｜运行第一个 iOS 应用
 
-最后核验：2026-08-28
+最后核验：2026-08-29
 
 ## 本篇结论
 
@@ -15,11 +15,11 @@
 
 ## 本篇验证环境
 
-以下步骤已于 2026-08-26 实际执行通过：
+以下步骤已于 2026-08-29 在正式 `Spark` 工程中实际执行通过：
 
 - macOS 26.5.2。
-- Flutter 3.47.0 stable。
-- Dart 3.13.0。
+- Flutter 3.47.2 stable。
+- Dart 3.13.2。
 - Xcode 26.6。
 - iOS 26.5 iPhone 17 Pro Simulator。
 
@@ -96,6 +96,8 @@ flutter run -d <device-id>
 
 首次运行会完成依赖解析、iOS 构建和安装，通常比之后慢。成功后，终端会进入交互状态，Simulator 显示 Flutter 默认计数器页面。
 
+![iOS Simulator 中的 Flutter 默认计数器页面](../../assets/screenshots/04-first-app/04-default-counter.png)
+
 ## 03 完成第一次热重载
 
 打开 `lib/main.dart`，找到下面这行：
@@ -121,6 +123,8 @@ r
 - 终端出现 reload 完成信息。
 - Simulator 中对应文字发生变化。
 - 计数器等当前状态通常不会因为热重载被清空。
+
+![热重载后标题变为 Spark](../../assets/screenshots/04-first-app/04-hot-reload-spark.png)
 
 ## 04 热重载、热重启与完整重启
 
@@ -175,6 +179,10 @@ flutter build ios --simulator
 ```
 
 这一步验证项目能在不依赖当前调试会话的情况下完成 Simulator 构建。
+
+下图汇总了正式 `Spark` 工程本次实际执行的分析、测试、构建和热重载输出：
+
+![Spark 工程分析、测试、iOS 构建和热重载输出](../../assets/screenshots/04-first-app/04-verification-output.png)
 
 ## 07 本篇暂时不改什么
 

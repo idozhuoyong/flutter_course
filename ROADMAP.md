@@ -1,6 +1,6 @@
 # Roadmap
 
-最后更新：2026-08-28
+最后更新：2026-08-29
 
 ## 当前阶段
 
@@ -8,6 +8,8 @@
 
 ## 已完成
 
+- 将 Flutter 上游教学基线固定为 3.47.2，并在 `app/` 创建正式 `Spark` 工程；iOS 运行、热重载、静态分析、测试和 Simulator 构建均已通过。
+- 补齐第 03、04 课所需的终端输出图和 iOS Simulator 截图；第 01、02 课为概念与平台边界说明，不添加无关运行截图。
 - 根据人工批注完善前 4 课：移除独立的环境提示专节，将网络前提放回具体命令，区分 VS Code 的 GitHub 克隆与官方压缩包下载，并改用 Simulator 可见标题验证首次热重载。
 - 建立“未验证内容不进入教程正文”的发布红线，并清理第 02 课的待确认版本占位表。
 - 将中国大陆学习者确定为默认受众，并把网络、账号、服务可用性与国内分发纳入课程规范。
@@ -20,14 +22,12 @@
 
 ## 进行中
 
-- 为前 4 篇补充终端输出截图和 iOS Simulator 截图。
+- 暂无。
 
 ## 待办
 
 ### 第一阶段：iOS 最小闭环
 
-- 补充前 4 篇的终端输出截图和 iOS Simulator 截图。
-- 创建 `Spark` Flutter 工程并固定首个可运行版本。
 - 编写第 5～9 篇：编辑器、Android、Flutter-OH、双 SDK 和项目结构。
 - 编写第 10～15 篇：够用的 Dart。
 - 编写第 16～22 篇：Flutter UI 与 iOS 体验。
@@ -50,11 +50,14 @@
 
 ## 阻塞
 
-- iOS、Android 与 Flutter-OH 的精确版本配对尚未锁定。需在创建 `Spark` 工程时，以当日稳定版本和 Flutter-OH 兼容矩阵为准。
+- iOS、Android 的 Flutter 上游版本已固定为 3.47.2；Flutter-OH 版本与共享 Dart 约束仍需根据兼容矩阵单独锁定。
 - 鸿蒙插件清单尚未逐项验证，相关能力只能标记为待确认。
 
 ## 最近验证
 
+- 2026-08-29：将项目外 Flutter stable SDK 从 3.47.0 升级到 3.47.2，确认 Dart 3.13.2、Xcode 26.6、macOS 26.5.2 和 iOS 26.5 iPhone 17 Pro Simulator 生效。
+- 2026-08-29：首次通过 `storage.googleapis.com` 下载 Flutter 3.47.2 iOS 构建产物时连接中断；改用 Flutter 官方中国网络文档列出的 `storage.flutter-io.cn` 后下载、构建和运行成功。
+- 2026-08-29：在正式 `app/` 工程中完成默认页面运行、标题改为 `Spark` 后热重载、`flutter analyze`、`flutter test`、`flutter build ios --simulator` 和 `flutter doctor -v` 验证。
 - 2026-08-28：使用 Flutter 3.47.0 在临时工程中复现第 04 课，将 `Flutter Demo Home Page` 改为 `Spark`；`flutter analyze`、`flutter test` 和 `flutter build ios --simulator` 均通过。
 - 2026-08-28：核对 Flutter 官方 macOS 版本清单，确认当前 stable 为 Flutter 3.47.2、Dart 3.13.2，并验证 Apple Silicon 官方 ZIP 地址返回 `HTTP 200`。
 - 2026-08-28：核对 Flutter 官方 VS Code 安装流程、中国网络镜像变量及本机 3.47.0 项目模板，确认 `Clone Flutter`、镜像配置、默认可见标题和 Widget 测试预期。
