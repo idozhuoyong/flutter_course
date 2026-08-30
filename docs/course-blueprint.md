@@ -1,15 +1,15 @@
 # 课程蓝图
 
-最后核验：2026-08-26
+最后核验：2026-08-30
 
 ## 课程目标
 
-读者完成课程后，应能独立开发一个具有 iOS 原生体验的 Flutter 应用，并从同一份核心业务代码构建 Android 与 HarmonyOS NEXT／OpenHarmony 版本。
+读者完成课程后，应能独立开发一个具有 iOS 原生体验的 Flutter 应用，理解同一份核心业务代码面向 Android 时的工具链与平台差异，并使用 Flutter-OH 适配 HarmonyOS NEXT／OpenHarmony。
 
-这里的“支持三端”有明确验收标准：
+这里的“三端覆盖”有明确边界：
 
 - iOS：每章运行，最终完成 Archive。
-- Android：每个阶段验证核心流程，最终完成 APK／AAB 构建。
+- Android：基于 Flutter 与 Android 官方一手来源说明相对 iOS 的差异，不进行运行、构建或截图验证，也不宣称 APK／AAB 已通过。
 - 鸿蒙：使用 Flutter-OH 完成 HAP 构建与核心流程真机验证。
 - 共享层：Dart 业务逻辑只维护一份，并在两条 SDK 轨道上通过测试。
 
@@ -37,8 +37,8 @@
 
 ### 第二部分：补齐开发环境
 
-5. VS Code／Android Studio 的 Flutter 开发配置
-6. 中国大陆环境下配置 Android SDK、模拟器与第一次 Android 构建
+5. VS Code 的 Flutter 开发配置、运行与断点调试
+6. Android Studio、Android SDK、模拟器与构建流程差异
 7. DevEco Studio、Flutter-OH 与大陆下载环境
 8. 两条 SDK 轨道：上游 Flutter 与 Flutter-OH 如何切换
 9. 认识 Flutter 项目：`lib`、`ios`、`android`、`ohos` 和 `pubspec.yaml`
@@ -116,7 +116,7 @@ Flutter 官方支持列表包含 iOS 与 Android，不包含 OpenHarmony。Flutt
 依赖按三级管理：
 
 - A 级：纯 Dart 包，优先使用。
-- B 级：已经验证 iOS、Android、OpenHarmony 的插件。
+- B 级：iOS 与 OpenHarmony 已实际验证，并有插件维护方的一手资料说明 Android 支持；Android 不记为实际验证通过。
 - C 级：只支持部分平台，需要能力降级或自行适配。
 
 ## 单篇模板
@@ -129,7 +129,7 @@ Flutter 官方支持列表包含 iOS 与 Android，不包含 OpenHarmony。Flutt
 4. 最小可运行步骤。
 5. 预期结果。
 6. 三端差异。
-7. 中国大陆环境提示。
+7. 必要的网络、账号与服务前提，写入对应操作步骤；没有相关前提时不单列固定专节。
 8. 常见问题。
 9. 完成检查。
 10. 一手来源和核验日期。

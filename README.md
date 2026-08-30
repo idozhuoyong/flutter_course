@@ -2,7 +2,7 @@
 
 这是一套以 iOS 为主平台，同时覆盖 Android 与 HarmonyOS NEXT／OpenHarmony 的中文 Flutter 教程。
 
-教程不会把三端包装成完全等价的一键构建：iOS、Android 使用 Flutter 上游稳定版，鸿蒙使用独立维护的 Flutter-OH。课程围绕同一个实战应用，讲清楚共享代码、平台差异、插件兼容和三端验证。
+教程不会把三端包装成完全等价的一键构建：iOS、Android 使用 Flutter 上游稳定版，鸿蒙使用独立维护的 Flutter-OH。课程围绕同一个实战应用，讲清楚共享代码、平台差异、插件兼容和验证边界；iOS 逐章实际验证，Android 只做官方一手来源核验和差异说明。
 
 ## 默认读者
 
@@ -20,6 +20,7 @@
 2. [三端支持边界：iOS、Android 与鸿蒙不是同一条轨道](docs/chapters/02-platform-boundaries.md)
 3. [搭建 macOS 与 iOS 开发环境](docs/chapters/03-macos-ios-setup.md)
 4. [运行第一个 iOS 应用](docs/chapters/04-first-ios-app.md)
+5. [用 VS Code 运行、调试和热重载 Flutter 应用](docs/chapters/05-vscode-flutter-workflow.md)
 
 完整课程设计见 [课程蓝图](docs/course-blueprint.md) 。
 
