@@ -1,6 +1,6 @@
 # Roadmap
 
-最后更新：2026-08-30
+最后更新：2026-08-31
 
 ## 当前阶段
 
@@ -8,6 +8,7 @@
 
 ## 已完成
 
+- 完成第 06 课：基于 Flutter 与 Android 官方一手资料说明 Android Studio、Android SDK、AVD、Emulator、Gradle／AGP、APK／AAB 及中国大陆下载源差异；未执行 Android 安装、运行、构建或截图验证。
 - 完成第 05 课：基于现有 VS Code、Flutter 和 iOS Simulator 环境讲清工程识别、运行、断点调试、热重载与输出定位；Android 仅保留官方依据支持的差异说明，未做运行或构建验证。
 - 将 Android 验证边界统一为“官方一手来源核验与差异说明”，不执行 Android 运行、构建或截图验证，也不宣称 APK／AAB 已通过。
 - 将 Flutter 上游教学基线固定为 3.47.2，并在 `app/` 创建正式 `Spark` 工程；iOS 运行、热重载、静态分析、测试和 Simulator 构建均已通过。
@@ -30,7 +31,7 @@
 
 ### 第一阶段：iOS 最小闭环
 
-- 编写第 6～9 篇：Android 差异、Flutter-OH、双 SDK 和项目结构。
+- 编写第 7～9 篇：Flutter-OH、双 SDK 和项目结构。
 - 编写第 10～15 篇：够用的 Dart。
 - 编写第 16～22 篇：Flutter UI 与 iOS 体验。
 
@@ -57,6 +58,7 @@
 
 ## 最近验证
 
+- 2026-08-31：核对 Flutter 官方 Android 环境、Android Studio、Android 构建发布与中国网络文档，以及 Android Developers 的 AVD、构建系统、AGP 兼容和工具依赖文档；只读检查 `app/android/` 目录结构，未执行任何 Android 环境或构建命令。
 - 2026-08-30：确认现有 Visual Studio Code 1.133.0 arm64、Flutter 扩展 3.140.0 和 Dart 扩展 3.140.0；VS Code 图形操作入口逐项对照官方文档，本次执行环境无法控制图形界面，未将 F5、断点命中和 Debug Toolbar 点击记为本机自动化验证。
 - 2026-08-30：在现有 Flutter 3.47.2、Dart 3.13.2、macOS 26.5.2 和 iOS Simulator 环境重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未执行任何 Android 验证命令。
 - 2026-08-29：将项目外 Flutter stable SDK 从 3.47.0 升级到 3.47.2，确认 Dart 3.13.2、Xcode 26.6、macOS 26.5.2 和 iOS 26.5 iPhone 17 Pro Simulator 生效。
