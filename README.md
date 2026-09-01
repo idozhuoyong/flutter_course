@@ -22,6 +22,7 @@
 4. [运行第一个 iOS 应用](docs/chapters/04-first-ios-app.md)
 5. [用 VS Code 运行、调试和热重载 Flutter 应用](docs/chapters/05-vscode-flutter-workflow.md)
 6. [看懂 Android Studio、Android SDK、模拟器与构建流程差异](docs/chapters/06-android-toolchain-differences.md)
+7. [认识 DevEco Studio、Flutter-OH 与大陆下载环境](docs/chapters/07-flutter-oh-environment.md)
 
 完整课程设计见 [课程蓝图](docs/course-blueprint.md) 。
 

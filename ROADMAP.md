@@ -1,6 +1,6 @@
 # Roadmap
 
-最后更新：2026-08-31
+最后更新：2026-09-01
 
 ## 当前阶段
 
@@ -8,6 +8,8 @@
 
 ## 已完成
 
+- 完成第 07 课：基于 CPF-Flutter、Flutter 与华为官方一手资料说明 DevEco Studio、Flutter-OH 稳定 tag、配套 API、环境变量和中国大陆下载源；正文明确标注阻塞环境未安装，未宣称 `Spark` 已完成 OpenHarmony 构建。
+- 完成第 07 课前置只读核验：锁定当前 Flutter-OH 稳定标签、上游 Flutter 与 Dart 基线，并核对现有 DevEco Studio、HarmonyOS／OpenHarmony SDK 和 `Spark` 的 Dart 约束；未安装、升级或启动任何工具。
 - 完成第 06 课：基于 Flutter 与 Android 官方一手资料说明 Android Studio、Android SDK、AVD、Emulator、Gradle／AGP、APK／AAB 及中国大陆下载源差异；未执行 Android 安装、运行、构建或截图验证。
 - 完成第 05 课：基于现有 VS Code、Flutter 和 iOS Simulator 环境讲清工程识别、运行、断点调试、热重载与输出定位；Android 仅保留官方依据支持的差异说明，未做运行或构建验证。
 - 将 Android 验证边界统一为“官方一手来源核验与差异说明”，不执行 Android 运行、构建或截图验证，也不宣称 APK／AAB 已通过。
@@ -31,7 +33,7 @@
 
 ### 第一阶段：iOS 最小闭环
 
-- 编写第 7～9 篇：Flutter-OH、双 SDK 和项目结构。
+- 编写第 8～9 篇：双 SDK 和项目结构。
 - 编写第 10～15 篇：够用的 Dart。
 - 编写第 16～22 篇：Flutter UI 与 iOS 体验。
 
@@ -53,11 +55,15 @@
 
 ## 阻塞
 
-- iOS、Android 的 Flutter 上游版本已固定为 3.47.2；Flutter-OH 版本与共享 Dart 约束仍需根据兼容矩阵单独锁定。
+- 第 07 课的实际环境验证仍然阻塞：CPF-Flutter 当前稳定标签 `3.41.10-ohos-1.0.1` 基于上游 Flutter 3.41.9，配套 DevEco Studio 26.0.0 Beta2、OpenHarmony API 26；本机现有 DevEco Studio 6.0.1.251 内置 HarmonyOS API 21，且未发现 Flutter-OH SDK 或 Flutter 插件。正文仅保留官方流程并明确未在本机执行。
+- Flutter-OH 3.41.9 基线配套 Dart 3.11.5，而当前 `Spark` 的 `pubspec.yaml` 要求 `sdk: ^3.13.2`。在 Flutter-OH 环境可用并完成双 SDK 测试前，不下调 Dart 约束，也不把共享工程写成已兼容。
 - 鸿蒙插件清单尚未逐项验证，相关能力只能标记为待确认。
 
 ## 最近验证
 
+- 2026-09-01：按新的课程验证边界完成第 07 课正文；环境、版本和命令均来自当前官方一手资料，本机未安装配套环境，未执行 Flutter-OH doctor、项目创建、HAP 构建、签名、模拟器或真机验证。
+- 2026-09-01：通过 [CPF-Flutter 官方 3.41.10-ohos-1.0.1 标签](https://gitcode.com/CPF-Flutter/flutter_flutter/tree/3.41.10-ohos-1.0.1) 与该标签的 Release Notes，确认当前稳定显示版本为 `3.41.10-ohos-1.0.1`，发布日期为 2026-08-17，要求 DevEco Studio／Command Line Tools 26.0.0 Beta2、应用目标 API 26；通过相同上游提交和 [Flutter 官方 SDK 归档](https://docs.flutter.dev/install/archive) 确认配套 Dart 3.11.5。
+- 2026-09-01：只读确认本机 DevEco Studio 6.0.1.251、内置 HarmonyOS SDK 6.0.1.112（API 21）、独立 OpenHarmony SDK 5.0.1.111（API 13）和 Hvigor 6.21.1；未发现 Flutter-OH SDK 或 DevEco Studio Flutter 插件，未启动 IDE、模拟器或构建命令。
 - 2026-08-31：核对 Flutter 官方 Android 环境、Android Studio、Android 构建发布与中国网络文档，以及 Android Developers 的 AVD、构建系统、AGP 兼容和工具依赖文档；只读检查 `app/android/` 目录结构，未执行任何 Android 环境或构建命令。
 - 2026-08-30：确认现有 Visual Studio Code 1.133.0 arm64、Flutter 扩展 3.140.0 和 Dart 扩展 3.140.0；VS Code 图形操作入口逐项对照官方文档，本次执行环境无法控制图形界面，未将 F5、断点命中和 Debug Toolbar 点击记为本机自动化验证。
 - 2026-08-30：在现有 Flutter 3.47.2、Dart 3.13.2、macOS 26.5.2 和 iOS Simulator 环境重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未执行任何 Android 验证命令。
