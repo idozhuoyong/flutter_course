@@ -8,6 +8,7 @@
 
 ## 已完成
 
+- 完成第 09 课：基于当前 `Spark` 工程讲清共享 Dart 源码、测试、`pubspec.yaml`、应用 lockfile、iOS／Android 宿主工程与生成文件的边界；正文明确 `ohos/` 尚未生成，不虚构其内部结构或验证结果。
 - 完成第 08 课：采用 SDK 绝对路径明确区分上游 Flutter 与 Flutter-OH，讲清 `PATH`、Flutter／Dart 版本、项目命令和编辑器进程的核验方法；上游 Flutter 轨道已实际验证，Flutter-OH 因未安装只保留一手资料支持的轨道设计和未验证说明。
 - 完成第 07 课：基于 CPF-Flutter、Flutter 与华为官方一手资料说明 DevEco Studio、Flutter-OH 稳定 tag、配套 API、环境变量和中国大陆下载源；正文明确标注阻塞环境未安装，未宣称 `Spark` 已完成 OpenHarmony 构建。
 - 完成第 07 课前置只读核验：锁定当前 Flutter-OH 稳定标签、上游 Flutter 与 Dart 基线，并核对现有 DevEco Studio、HarmonyOS／OpenHarmony SDK 和 `Spark` 的 Dart 约束；未安装、升级或启动任何工具。
@@ -34,7 +35,6 @@
 
 ### 第一阶段：iOS 最小闭环
 
-- 编写第 09 篇：认识 Flutter 项目结构。
 - 编写第 10～15 篇：够用的 Dart。
 - 编写第 16～22 篇：Flutter UI 与 iOS 体验。
 
@@ -62,6 +62,8 @@
 
 ## 最近验证
 
+- 2026-09-02：逐项只读检查 `app/` 已跟踪源码、平台工程和忽略规则，确认 `lib/`、`test/`、`ios/`、`android/`、`pubspec.yaml` 与 `pubspec.lock` 的当前状态，以及 `.dart_tool/`、`build/`、本机路径和 iOS 生成配置均被正确忽略；确认 `ohos/` 不存在。
+- 2026-09-02：完成第 09 课后，使用 Track A 的绝对路径重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未运行 Android 或 Flutter-OH 命令，未修改依赖和 Dart 约束。
 - 2026-09-02：使用 `/Users/ido/development/flutter/flutter/bin/flutter` 绝对路径确认 Track A 为 Flutter 3.47.2、Dart 3.13.2，并在 `app/` 重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未安装或执行 Flutter-OH，也未修改 `Spark` 的 Dart 约束。
 - 2026-09-02：核对 Flutter 官方 PATH 与中国网络文档、Dart 官方 SDK 约束文档，以及 CPF-Flutter 当前仓库、稳定 tag、Release Notes 和环境指南；第 08 课采用无需新增依赖的绝对路径方案，避免用两套同名 SDK 的 `PATH` 顺序切换。
 - 2026-09-01：按新的课程验证边界完成第 07 课正文；环境、版本和命令均来自当前官方一手资料，本机未安装配套环境，未执行 Flutter-OH doctor、项目创建、HAP 构建、签名、模拟器或真机验证。

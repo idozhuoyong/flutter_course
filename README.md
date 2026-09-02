@@ -24,6 +24,7 @@
 6. [看懂 Android Studio、Android SDK、模拟器与构建流程差异](docs/chapters/06-android-toolchain-differences.md)
 7. [认识 DevEco Studio、Flutter-OH 与大陆下载环境](docs/chapters/07-flutter-oh-environment.md)
 8. [用绝对路径切换上游 Flutter 与 Flutter-OH](docs/chapters/08-dual-sdk-tracks.md)
+9. [认识 Flutter 项目：共享源码、平台工程与生成文件](docs/chapters/09-flutter-project-structure.md)
 
 完整课程设计见 [课程蓝图](docs/course-blueprint.md) 。
 
