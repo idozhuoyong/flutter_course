@@ -1,6 +1,6 @@
 # Roadmap
 
-最后更新：2026-09-01
+最后更新：2026-09-02
 
 ## 当前阶段
 
@@ -8,6 +8,7 @@
 
 ## 已完成
 
+- 完成第 08 课：采用 SDK 绝对路径明确区分上游 Flutter 与 Flutter-OH，讲清 `PATH`、Flutter／Dart 版本、项目命令和编辑器进程的核验方法；上游 Flutter 轨道已实际验证，Flutter-OH 因未安装只保留一手资料支持的轨道设计和未验证说明。
 - 完成第 07 课：基于 CPF-Flutter、Flutter 与华为官方一手资料说明 DevEco Studio、Flutter-OH 稳定 tag、配套 API、环境变量和中国大陆下载源；正文明确标注阻塞环境未安装，未宣称 `Spark` 已完成 OpenHarmony 构建。
 - 完成第 07 课前置只读核验：锁定当前 Flutter-OH 稳定标签、上游 Flutter 与 Dart 基线，并核对现有 DevEco Studio、HarmonyOS／OpenHarmony SDK 和 `Spark` 的 Dart 约束；未安装、升级或启动任何工具。
 - 完成第 06 课：基于 Flutter 与 Android 官方一手资料说明 Android Studio、Android SDK、AVD、Emulator、Gradle／AGP、APK／AAB 及中国大陆下载源差异；未执行 Android 安装、运行、构建或截图验证。
@@ -33,7 +34,7 @@
 
 ### 第一阶段：iOS 最小闭环
 
-- 编写第 8～9 篇：双 SDK 和项目结构。
+- 编写第 09 篇：认识 Flutter 项目结构。
 - 编写第 10～15 篇：够用的 Dart。
 - 编写第 16～22 篇：Flutter UI 与 iOS 体验。
 
@@ -61,6 +62,8 @@
 
 ## 最近验证
 
+- 2026-09-02：使用 `/Users/ido/development/flutter/flutter/bin/flutter` 绝对路径确认 Track A 为 Flutter 3.47.2、Dart 3.13.2，并在 `app/` 重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未安装或执行 Flutter-OH，也未修改 `Spark` 的 Dart 约束。
+- 2026-09-02：核对 Flutter 官方 PATH 与中国网络文档、Dart 官方 SDK 约束文档，以及 CPF-Flutter 当前仓库、稳定 tag、Release Notes 和环境指南；第 08 课采用无需新增依赖的绝对路径方案，避免用两套同名 SDK 的 `PATH` 顺序切换。
 - 2026-09-01：按新的课程验证边界完成第 07 课正文；环境、版本和命令均来自当前官方一手资料，本机未安装配套环境，未执行 Flutter-OH doctor、项目创建、HAP 构建、签名、模拟器或真机验证。
 - 2026-09-01：通过 [CPF-Flutter 官方 3.41.10-ohos-1.0.1 标签](https://gitcode.com/CPF-Flutter/flutter_flutter/tree/3.41.10-ohos-1.0.1) 与该标签的 Release Notes，确认当前稳定显示版本为 `3.41.10-ohos-1.0.1`，发布日期为 2026-08-17，要求 DevEco Studio／Command Line Tools 26.0.0 Beta2、应用目标 API 26；通过相同上游提交和 [Flutter 官方 SDK 归档](https://docs.flutter.dev/install/archive) 确认配套 Dart 3.11.5。
 - 2026-09-01：只读确认本机 DevEco Studio 6.0.1.251、内置 HarmonyOS SDK 6.0.1.112（API 21）、独立 OpenHarmony SDK 5.0.1.111（API 13）和 Hvigor 6.21.1；未发现 Flutter-OH SDK 或 DevEco Studio Flutter 插件，未启动 IDE、模拟器或构建命令。
