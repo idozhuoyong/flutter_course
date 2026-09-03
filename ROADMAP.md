@@ -8,6 +8,7 @@
 
 ## 已完成
 
+- 完成第 10 课：以一条 `Spark` 灵感草稿讲清 Dart 类型推断、基础业务类型、`var`／`final`／`const`、可靠空安全和不可变值边界，并新增无第三方依赖的单文件纯 Dart 示例。
 - 完成第 09 课：基于当前 `Spark` 工程讲清共享 Dart 源码、测试、`pubspec.yaml`、应用 lockfile、iOS／Android 宿主工程与生成文件的边界；正文明确 `ohos/` 尚未生成，不虚构其内部结构或验证结果。
 - 完成第 08 课：采用 SDK 绝对路径明确区分上游 Flutter 与 Flutter-OH，讲清 `PATH`、Flutter／Dart 版本、项目命令和编辑器进程的核验方法；上游 Flutter 轨道已实际验证，Flutter-OH 因未安装只保留一手资料支持的轨道设计和未验证说明。
 - 完成第 07 课：基于 CPF-Flutter、Flutter 与华为官方一手资料说明 DevEco Studio、Flutter-OH 稳定 tag、配套 API、环境变量和中国大陆下载源；正文明确标注阻塞环境未安装，未宣称 `Spark` 已完成 OpenHarmony 构建。
@@ -35,7 +36,7 @@
 
 ### 第一阶段：iOS 最小闭环
 
-- 编写第 10～15 篇：够用的 Dart。
+- 编写第 11～15 篇：够用的 Dart。
 - 编写第 16～22 篇：Flutter UI 与 iOS 体验。
 
 ### 第二阶段：真实业务应用
@@ -62,6 +63,8 @@
 
 ## 最近验证
 
+- 2026-09-02：核对 Dart 官方变量、内置类型、类型系统、可靠空安全和集合资料；使用 Dart 3.13.2 对 `examples/lesson_10_data_basics.dart` 完成格式检查、静态分析、默认参数运行和自定义参数运行，最终均通过且输出与第 10 课正文一致；空标题按预期以非零状态和 `StateError` 失败。
+- 2026-09-02：完成第 10 课后，重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未执行 Android 或 Flutter-OH 命令，未修改 `Spark` 代码、依赖和 Dart 约束。
 - 2026-09-02：逐项只读检查 `app/` 已跟踪源码、平台工程和忽略规则，确认 `lib/`、`test/`、`ios/`、`android/`、`pubspec.yaml` 与 `pubspec.lock` 的当前状态，以及 `.dart_tool/`、`build/`、本机路径和 iOS 生成配置均被正确忽略；确认 `ohos/` 不存在。
 - 2026-09-02：完成第 09 课后，使用 Track A 的绝对路径重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未运行 Android 或 Flutter-OH 命令，未修改依赖和 Dart 约束。
 - 2026-09-02：使用 `/Users/ido/development/flutter/flutter/bin/flutter` 绝对路径确认 Track A 为 Flutter 3.47.2、Dart 3.13.2，并在 `app/` 重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未安装或执行 Flutter-OH，也未修改 `Spark` 的 Dart 约束。
