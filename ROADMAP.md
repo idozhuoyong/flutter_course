@@ -1,6 +1,6 @@
 # Roadmap
 
-最后更新：2026-09-02
+最后更新：2026-09-04
 
 ## 当前阶段
 
@@ -8,6 +8,7 @@
 
 ## 已完成
 
+- 完成第 11 课：把第 10 课的零散灵感字段整理为 `SparkIdea`，通过标题与说明清洗函数、传统构造函数、命名参数、`required`、默认值和实例方法讲清最小对象边界；新增无第三方依赖的单文件纯 Dart 示例，并忽略根目录 Hvigor 生成日志。
 - 完成第 10 课：以一条 `Spark` 灵感草稿讲清 Dart 类型推断、基础业务类型、`var`／`final`／`const`、可靠空安全和不可变值边界，并新增无第三方依赖的单文件纯 Dart 示例。
 - 完成第 09 课：基于当前 `Spark` 工程讲清共享 Dart 源码、测试、`pubspec.yaml`、应用 lockfile、iOS／Android 宿主工程与生成文件的边界；正文明确 `ohos/` 尚未生成，不虚构其内部结构或验证结果。
 - 完成第 08 课：采用 SDK 绝对路径明确区分上游 Flutter 与 Flutter-OH，讲清 `PATH`、Flutter／Dart 版本、项目命令和编辑器进程的核验方法；上游 Flutter 轨道已实际验证，Flutter-OH 因未安装只保留一手资料支持的轨道设计和未验证说明。
@@ -63,6 +64,8 @@
 
 ## 最近验证
 
+- 2026-09-04：核对 Dart 官方函数、类、构造函数、错误处理与 Effective Dart 用法资料；使用 Dart 3.13.2 对 `examples/lesson_11_functions_and_classes.dart` 完成格式检查和静态分析，默认参数与自定义参数运行结果均与正文一致，空标题和 81 字符标题按预期以非零状态及 `StateError` 失败，1 字符与 80 字符边界通过。
+- 2026-09-04：完成第 11 课后，检查全部 Markdown 内部链接与补丁空白，重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未执行 Android 或 Flutter-OH 命令，未修改 `Spark` 代码、依赖和 Dart 约束。
 - 2026-09-02：核对 Dart 官方变量、内置类型、类型系统、可靠空安全和集合资料；使用 Dart 3.13.2 对 `examples/lesson_10_data_basics.dart` 完成格式检查、静态分析、默认参数运行和自定义参数运行，最终均通过且输出与第 10 课正文一致；空标题按预期以非零状态和 `StateError` 失败。
 - 2026-09-02：完成第 10 课后，重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未执行 Android 或 Flutter-OH 命令，未修改 `Spark` 代码、依赖和 Dart 约束。
 - 2026-09-02：逐项只读检查 `app/` 已跟踪源码、平台工程和忽略规则，确认 `lib/`、`test/`、`ios/`、`android/`、`pubspec.yaml` 与 `pubspec.lock` 的当前状态，以及 `.dart_tool/`、`build/`、本机路径和 iOS 生成配置均被正确忽略；确认 `ohos/` 不存在。

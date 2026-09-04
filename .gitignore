@@ -23,6 +23,7 @@ Pods/
 
 # Android
 .gradle/
+.hvigor/
 local.properties
 
 # AI local configuration

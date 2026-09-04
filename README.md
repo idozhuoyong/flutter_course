@@ -26,6 +26,7 @@
 8. [用绝对路径切换上游 Flutter 与 Flutter-OH](docs/chapters/08-dual-sdk-tracks.md)
 9. [认识 Flutter 项目：共享源码、平台工程与生成文件](docs/chapters/09-flutter-project-structure.md)
 10. [用 Dart 表达一条可靠的灵感数据](docs/chapters/10-dart-data-basics.md)
+11. [用函数和类建立一条有效的灵感](docs/chapters/11-dart-functions-and-classes.md)
 
 完整课程设计见 [课程蓝图](docs/course-blueprint.md) 。
 
