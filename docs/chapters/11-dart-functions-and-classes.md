@@ -260,7 +260,7 @@ SparkIdea(title: '学习 Dart', priority: 4);
 本篇只使用纯 Dart 的函数、类、构造函数和标准库，没有调用 iOS、Android 或 OpenHarmony API：
 
 - Track A：已使用 Dart 3.13.2 实际完成格式检查、静态分析和运行，并继续验证 Flutter 工程与 iOS Simulator 构建。
-- Android：共享 Dart 语义与 iOS 相同；按课程边界不执行 Android 运行或构建。
+- Android：本篇独立纯 Dart 示例不为每个平台重复运行；当前 `Spark` 应用已在 Android 16 模拟器完成运行回归，并通过 debug APK 与 release AAB 构建，但这些结果不等于本示例调用了 Android API。
 - Track B：本机尚未安装 Flutter-OH，本篇不在 Dart 3.11.5 上执行或宣称通过。示例刻意不使用 Dart 3.13 新增的主构造函数，但这不能代替实际双轨验证。
 
 ## 预期结果
@@ -272,7 +272,7 @@ SparkIdea(title: '学习 Dart', priority: 4);
 - 缺少标题或传错静态类型时，分析器能直接指出错误。
 - 空标题和越界优先级无法创建正常业务对象。
 - 示例默认参数、自定义参数和输入边界均符合预期。
-- `Spark` 应用原有测试和 iOS 构建不受影响。
+- `Spark` 应用原有测试、iOS 构建与 Android 回归不受影响。
 
 ## 常见问题
 

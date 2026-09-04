@@ -300,7 +300,7 @@ Bad state: 标题长度必须在 1～80 个字符之间
 本篇示例只使用纯 Dart 类型、控制流和标准库，没有调用 iOS、Android 或 OpenHarmony API。源码设计上适合放在共享层，但“纯 Dart”不自动等于已经完成双 SDK 验证：
 
 - Track A：已使用 Dart 3.13.2 实际分析和运行，并继续通过 Flutter 分析、测试与 iOS Simulator 构建。
-- Android：共享 Dart 语义与 iOS 相同；按课程边界不执行 Android 运行或构建。
+- Android：本篇独立纯 Dart 示例不为每个平台重复运行；当前 `Spark` 应用已在 Android 16 模拟器完成运行回归，并通过 debug APK 与 release AAB 构建，但这些结果不等于本示例调用了 Android API。
 - Track B：当前 Flutter-OH 配套 Dart 3.11.5，而 `Spark` 要求 `^3.13.2`；本篇不在 Flutter-OH 上执行或宣称通过。
 
 示例使用的语法没有被当作 OpenHarmony 兼容性证据。只有未来在 Flutter-OH 轨道实际分析和测试后，才能记录双轨通过。
@@ -314,7 +314,7 @@ Bad state: 标题长度必须在 1～80 个字符之间
 - 能用 `String?` 表达可缺失说明，并在使用前处理 `null`。
 - 知道 `final` 列表仍可能变化，`const` 列表才是常量值。
 - 示例静态分析通过，默认参数与自定义参数均能运行。
-- `Spark` 应用原有测试和 iOS 构建不受影响。
+- `Spark` 应用原有测试、iOS 构建与 Android 回归不受影响。
 
 ## 常见问题
 

@@ -1,6 +1,6 @@
 # 09｜认识 Flutter 项目：共享源码、平台工程与生成文件
 
-最后核验：2026-09-02
+最后核验：2026-09-04
 
 ## 本篇结论
 
@@ -8,7 +8,7 @@ Flutter 项目不是只有 `lib/main.dart`，也不是四套彼此独立的应�
 
 判断一个文件能不能改，先看它属于源码、平台配置还是生成产物。业务功能优先写入 `lib/`；确实涉及系统能力时才进入平台目录；`.dart_tool/`、`build/` 和带有 `Generated` 标记的本地文件通常由工具维护，不应拿来承载业务修改。
 
-本篇以当前 `Spark` 工程为准完成只读检查，并在上游 Flutter 轨道重新验证分析、测试与 iOS Simulator 构建。Android 只说明已生成文件的职责，没有运行或构建；`ohos/` 尚未生成，因此只说明官方创建入口与验证边界，不展示不存在的本机目录。
+本篇以当前 `Spark` 工程为准完成结构检查，并在上游 Flutter 轨道重新验证分析、测试、iOS Simulator 构建，以及 Android 模拟器运行、debug APK 和 release AAB 构建。`ohos/` 尚未生成，因此只说明官方创建入口与验证边界，不展示不存在的本机目录。
 
 ## 学完你能做到
 
@@ -28,7 +28,7 @@ Flutter 项目不是只有 `lib/main.dart`，也不是四套彼此独立的应�
 cd app
 ```
 
-本篇只读取现有结构，不新增业务文件，不修改原生工程，也不运行 Android 或 OpenHarmony 命令。
+本篇不新增业务文件、不修改原生工程，也不运行 OpenHarmony 命令。Android 验证复用第 06 课已经跑通的现有宿主工程和构建链。
 
 ## 01 先看 Spark 的真实结构
 
@@ -104,7 +104,7 @@ void main() {
 
 `test/` 与 `lib/` 一样属于需要提交的源码。测试不是构建产物，也不应该放进 `build/`。
 
-本课程后续会把纯 Dart 逻辑和 Widget 行为分别验证。当前测试只能证明默认计数器流程仍然工作，不能证明 Android 或 OpenHarmony 应用已经运行。
+本课程后续会把纯 Dart 逻辑和 Widget 行为分别验证。当前测试只能证明默认计数器流程仍然工作；Android 是否运行还要由第 06 课的设备结果证明，OpenHarmony 则仍未运行。不同证据不能互相替代。
 
 ## 04 pubspec.yaml 是项目声明，不是下载结果
 
@@ -198,7 +198,7 @@ flutter:
 
 `android/local.properties` 保存当前机器的 SDK 路径，已经被 `android/.gitignore` 排除。它是本地连接信息，不应复制给读者或提交到仓库。
 
-本篇只读取这些文件。按照课程边界，没有运行 Gradle、模拟器、APK 或 AAB 构建。
+本篇没有修改这些文件。当前宿主工程已通过 Android 16 模拟器安装与运行、debug APK 和 release AAB 构建，说明这套 Gradle 配置能接入共享 Flutter 应用；当前 AAB 使用模板调试密钥，不能据此宣称正式发布配置已经完成。
 
 ## 08 ohos 当前不存在，不能假装已经生成
 
@@ -270,6 +270,7 @@ git check-ignore -v .dart_tool/package_config.json
 - `test/widget_test.dart` 是当前 Widget 测试。
 - `pubspec.yaml` 声明项目与依赖，`pubspec.lock` 锁定应用解析结果。
 - `ios/` 与 `android/` 是已生成并纳入版本控制的平台宿主工程。
+- 当前 `android/` 已实际进入模拟器运行、debug APK 和 release AAB 构建链，不只是一个未验证目录。
 - `.dart_tool/`、`build/` 和本机路径文件已被忽略。
 - `ohos/` 当前不存在，不能宣称已完成 OpenHarmony 工程接入。
 

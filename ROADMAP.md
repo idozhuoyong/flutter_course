@@ -1,22 +1,23 @@
 # Roadmap
 
-最后更新：2026-09-04
+最后更新：2026-09-05
 
 ## 当前阶段
 
-第一阶段：建立课程规范、目录骨架与 iOS 入门闭环。
+第一阶段：建立课程规范、目录骨架与 iOS 主线／Android 基线入门闭环。
 
 ## 已完成
 
+- 补齐已写教程的 Android 验证：调整项目规范与课程蓝图，使用现有 Android 16（API 36）ARM64 模拟器完成 `Spark` 安装、启动、计数交互和真实源码热重载，完成 debug APK 与 release AAB 构建，并新增 Android 运行截图；正文明确当前 AAB 使用模板调试密钥，不属于正式发布包。
 - 完成第 11 课：把第 10 课的零散灵感字段整理为 `SparkIdea`，通过标题与说明清洗函数、传统构造函数、命名参数、`required`、默认值和实例方法讲清最小对象边界；新增无第三方依赖的单文件纯 Dart 示例，并忽略根目录 Hvigor 生成日志。
 - 完成第 10 课：以一条 `Spark` 灵感草稿讲清 Dart 类型推断、基础业务类型、`var`／`final`／`const`、可靠空安全和不可变值边界，并新增无第三方依赖的单文件纯 Dart 示例。
 - 完成第 09 课：基于当前 `Spark` 工程讲清共享 Dart 源码、测试、`pubspec.yaml`、应用 lockfile、iOS／Android 宿主工程与生成文件的边界；正文明确 `ohos/` 尚未生成，不虚构其内部结构或验证结果。
 - 完成第 08 课：采用 SDK 绝对路径明确区分上游 Flutter 与 Flutter-OH，讲清 `PATH`、Flutter／Dart 版本、项目命令和编辑器进程的核验方法；上游 Flutter 轨道已实际验证，Flutter-OH 因未安装只保留一手资料支持的轨道设计和未验证说明。
 - 完成第 07 课：基于 CPF-Flutter、Flutter 与华为官方一手资料说明 DevEco Studio、Flutter-OH 稳定 tag、配套 API、环境变量和中国大陆下载源；正文明确标注阻塞环境未安装，未宣称 `Spark` 已完成 OpenHarmony 构建。
 - 完成第 07 课前置只读核验：锁定当前 Flutter-OH 稳定标签、上游 Flutter 与 Dart 基线，并核对现有 DevEco Studio、HarmonyOS／OpenHarmony SDK 和 `Spark` 的 Dart 约束；未安装、升级或启动任何工具。
-- 完成第 06 课：基于 Flutter 与 Android 官方一手资料说明 Android Studio、Android SDK、AVD、Emulator、Gradle／AGP、APK／AAB 及中国大陆下载源差异；未执行 Android 安装、运行、构建或截图验证。
-- 完成第 05 课：基于现有 VS Code、Flutter 和 iOS Simulator 环境讲清工程识别、运行、断点调试、热重载与输出定位；Android 仅保留官方依据支持的差异说明，未做运行或构建验证。
-- 将 Android 验证边界统一为“官方一手来源核验与差异说明”，不执行 Android 运行、构建或截图验证，也不宣称 APK／AAB 已通过。
+- 完成第 06 课：基于 Flutter 与 Android 官方一手资料说明 Android Studio、Android SDK、AVD、Emulator、Gradle／AGP、APK／AAB 及中国大陆下载源差异，并补齐 Android 工具链、模拟器运行、交互、热重载和构建验证。
+- 完成第 05 课：基于现有 VS Code、Flutter 和 iOS Simulator 环境讲清工程识别、运行、断点调试、热重载与输出定位；补充 Android 命令行运行和真实源码热重载结果，同时保留 VS Code 图形操作需人工确认的证据边界。
+- 将 Android 验证边界调整为“在工具链、首次运行、平台适配和发布构建等阶段门实际验证”，纯 Dart 示例不为平台重复运行，后续应用改动需要覆盖 Android 回归。
 - 将 Flutter 上游教学基线固定为 3.47.2，并在 `app/` 创建正式 `Spark` 工程；iOS 运行、热重载、静态分析、测试和 Simulator 构建均已通过。
 - 补齐第 03、04 课所需的终端输出图和 iOS Simulator 截图；第 01、02 课为概念与平台边界说明，不添加无关运行截图。
 - 根据人工批注完善前 4 课：移除独立的环境提示专节，将网络前提放回具体命令，区分 VS Code 的 GitHub 克隆与官方压缩包下载，并改用 Simulator 可见标题验证首次热重载。
@@ -25,7 +26,7 @@
 - 确定项目采用 MIT License，并补充标准许可文件。
 - 补齐 `.gitignore`、`.gitattributes` 和空目录占位文件，建立首个版本控制基线。
 - 建立项目级内容、代码和验证规范。
-- 确定课程定位：iOS 主讲并逐章验证，Android 只说明差异，鸿蒙使用 Flutter-OH 独立验证。
+- 确定课程定位：iOS 主讲并逐章验证，Android 作为副平台按阶段门实际验证，鸿蒙使用 Flutter-OH 独立验证。
 - 完成 38 篇课程蓝图和贯穿项目定义。
 - 完成前 4 篇入门教程初稿。
 
@@ -35,7 +36,7 @@
 
 ## 待办
 
-### 第一阶段：iOS 最小闭环
+### 第一阶段：iOS 主线与 Android 基线
 
 - 编写第 11～15 篇：够用的 Dart。
 - 编写第 16～22 篇：Flutter UI 与 iOS 体验。
@@ -48,7 +49,7 @@
 ### 第三阶段：Android 差异与鸿蒙适配
 
 - 编写第 30～35 篇：三端适配、插件矩阵与 Platform Channel。
-- 基于 Flutter、Android 与插件维护方的一手资料完成 Android 差异说明，不执行 APK／AAB 构建。
+- 基于 Flutter、Android 与插件维护方的一手资料完成 Android 差异说明，并对涉及 Android 的运行、构建与平台行为完成对应的模拟器或真机验证。
 - 完成 HarmonyOS HAP 构建和真机验证。
 
 ### 第四阶段：工程化与交付
@@ -64,6 +65,8 @@
 
 ## 最近验证
 
+- 2026-09-04：使用 Flutter 3.47.2、Dart 3.13.2、Android Studio 2026.1、Android SDK 37.0.0、内置 JDK 25.0.2 和 `PocketUtils_API_36` 完成 Android 基线验证；`flutter doctor -v`、`flutter devices`、`flutter analyze`、`flutter test`、`flutter build apk --debug` 与 `flutter build appbundle` 均通过。`Spark` 在 Android 16（API 36）ARM64 模拟器安装启动成功，计数从 `0` 变为 `1`；标题临时改为 `Spark Android` 后热重载 1 个 library，恢复 `Spark` 后再次成功，临时源码改动已消除。
+- 2026-09-04：debug APK 生成于 `app/build/app/outputs/flutter-apk/app-debug.apk`，release AAB 生成于 `app/build/app/outputs/bundle/release/app-release.aab`；当前 release 变体仍使用模板调试密钥，只验证打包链路，不宣称正式发布签名或应用商店流程已经通过。新增两张 Android 模拟器运行截图，并重新核对 Flutter Android 环境、构建发布、热重载及 Android AVD／AGP 官方资料。
 - 2026-09-04：核对 Dart 官方函数、类、构造函数、错误处理与 Effective Dart 用法资料；使用 Dart 3.13.2 对 `examples/lesson_11_functions_and_classes.dart` 完成格式检查和静态分析，默认参数与自定义参数运行结果均与正文一致，空标题和 81 字符标题按预期以非零状态及 `StateError` 失败，1 字符与 80 字符边界通过。
 - 2026-09-04：完成第 11 课后，检查全部 Markdown 内部链接与补丁空白，重新运行 `flutter analyze`、`flutter test` 与 `flutter build ios --simulator`，全部通过；未执行 Android 或 Flutter-OH 命令，未修改 `Spark` 代码、依赖和 Dart 约束。
 - 2026-09-02：核对 Dart 官方变量、内置类型、类型系统、可靠空安全和集合资料；使用 Dart 3.13.2 对 `examples/lesson_10_data_basics.dart` 完成格式检查、静态分析、默认参数运行和自定义参数运行，最终均通过且输出与第 10 课正文一致；空标题按预期以非零状态和 `StateError` 失败。

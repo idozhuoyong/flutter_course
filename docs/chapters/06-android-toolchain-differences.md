@@ -1,12 +1,12 @@
 # 06｜看懂 Android Studio、Android SDK、模拟器与构建流程差异
 
-最后核验：2026-08-31
+最后核验：2026-09-04
 
 ## 本篇结论
 
 Android Studio 只是开发入口之一，不等于完整的 Android 工具链。Flutter 面向 Android 运行或构建时，还会依赖 Android SDK、JDK、Gradle、Android Gradle Plugin、设备或模拟器；这些组件与 iOS 的 Xcode、Simulator 和构建系统并不是逐项等价的替换关系。
 
-本篇只帮助你看懂这套关系以及它与 iOS 流程的差异，不安装或修改 Android 工具，不创建模拟器，不运行 Android 应用，也不构建 APK／AAB。
+本篇在不安装新工具、不修改 Gradle 或签名配置的前提下，使用现有 Android 16 模拟器跑通 `Spark` 的环境检查、安装、启动、交互、热重载、debug APK 和 release AAB 构建。AAB 当前使用模板调试密钥，只能证明 release 打包链路可用，不能用于正式发布。
 
 ## 学完你能做到
 
@@ -15,25 +15,30 @@ Android Studio 只是开发入口之一，不等于完整的 Android 工具链�
 - 区分 AVD 配置和 Android Emulator 运行实例。
 - 说清 Flutter、Gradle、Android Gradle Plugin 和 JDK 如何参与 Android 构建。
 - 区分 APK 与 AAB，不把 Google Play 的要求套用到所有中国大陆 Android 渠道。
+- 用明确设备 ID 运行 `Spark`，并验证页面、交互和热重载。
+- 构建 debug APK 与 release AAB，同时识别签名验证边界。
 - 遇到下载失败时，先判断失败的是 Flutter、Android SDK、Gradle 还是 Maven 依赖。
 
 ## 本篇核验边界
 
-2026-08-31 已逐项核对 Flutter 与 Android 官方文档，并只读检查课程 `Spark` 工程中的 Android 目录结构。
+2026-09-04 重新核对 Flutter 3.47.2 对应的 Android 环境、构建发布与热重载文档，以及 Android Developers 的 AVD 和 AGP 资料，并完成以下本机验证：
 
-以下内容没有进行实际验证：
+| 项目 | 本机结果 |
+|---|---|
+| Flutter／Dart | Flutter 3.47.2 stable／Dart 3.13.2 |
+| Android Studio／JDK | Android Studio 2026.1／内置 OpenJDK 25.0.2 |
+| Android SDK | SDK 37.0.0；项目实际使用 `compileSdk 36`、`targetSdk 36`、`minSdk 24` |
+| Android 构建链 | 已安装 Build-Tools 36.0.0／37.0.0；项目使用 NDK 28.2.13676358、AGP 9.1.0、Gradle 9.3.1 |
+| 模拟器 | `PocketUtils_API_36`，Android 16（API 36），ARM64，硬件加速正常 |
+| 工具链检查 | `flutter doctor -v` 的 Android toolchain 通过，Android SDK 许可证全部接受 |
+| 应用验证 | 安装与启动成功，标题为 `Spark`，计数从 `0` 变为 `1`，真实源码热重载与恢复均成功 |
+| 构建验证 | debug APK 成功；release AAB 成功，但仍使用模板调试密钥 |
 
-- Android Studio 的 Flutter 插件安装与运行。
-- Android SDK 组件下载和许可证接受。
-- AVD 创建、启动与设备连接。
-- `flutter doctor` 的 Android toolchain 结果。
-- Android 调试、热重载、APK／AAB 构建与签名。
-
-因此，本篇出现的 Android 操作入口和命令只用于说明它们在完整流程中的位置，不代表课程已经执行通过。
+本篇没有验证 Android Studio Flutter 插件的图形操作、从零创建 AVD、Android 真机、无 GMS 厂商环境、正式发布签名或任何应用商店上传流程。
 
 ## 开始前检查
 
-你需要已经读完第 05 课，并能在 iOS Simulator 中运行 `Spark`。本篇继续使用现有 `app/` 工程，不要求你打开 Android Studio。
+你需要已经读完第 05 课，并能在 iOS Simulator 中运行 `Spark`。本篇继续使用现有 `app/` 工程；Android Studio 用于确认 SDK 与启动 AVD，代码编辑仍可在 VS Code 完成。
 
 在 VS Code Explorer 中展开 `app/android/`。只查看文件，不修改 Gradle、SDK、JDK、签名或环境变量配置。
 
@@ -70,7 +75,7 @@ Flutter 官方 Android 环境说明要求通过 SDK Manager 管理平台和工�
 
 不要看到一个“Android SDK 已安装”提示，就默认所有平台、工具和系统镜像都齐全。SDK Platform、Build-Tools、Emulator 和 System Image 是不同下载项。
 
-本课程也不在正文固定某个 API Level。实际项目需要同时考虑 Flutter 模板、Android Gradle Plugin 兼容范围，以及 `compileSdk`、`targetSdk`、`minSdk` 的用途；只追求数字最大并不能证明工具链兼容。
+本课程当前 Flutter 3.47.2 模板实际使用 `compileSdk 36`、`targetSdk 36`、`minSdk 24`，本机也安装了对应 Platform 与 Build-Tools。这里记录的是当前可复现基线，不是要求读者手工把数字改到一致；实际项目需要同时考虑 Flutter 模板、Android Gradle Plugin 兼容范围，以及三个 SDK 数值的用途，只追求数字最大并不能证明工具链兼容。
 
 ## 03 AVD 与 Emulator 不是同一个概念
 
@@ -130,12 +135,14 @@ Flutter 官方发布文档给出两条构建入口：
 
 | 目的 | Flutter 命令 | 产物含义 |
 |---|---|---|
-| 构建 App Bundle | `flutter build appbundle` | 生成 `.aab` 发布包 |
-| 构建拆分 APK | `flutter build apk --split-per-abi` | 按 ABI 生成多个可安装 APK |
+| 构建调试 APK | `flutter build apk --debug` | 生成可安装的 debug APK |
+| 构建 App Bundle | `flutter build appbundle` | 生成 release AAB |
 
-这些命令本篇不执行。Google Play 偏好 AAB，但这不是所有 Android 分发渠道的统一规则。面向中国大陆发布时，需要逐个核对目标应用商店当时的官方包格式、签名和上架要求，不能默认 Google Play 流程等于国内渠道流程。
+两条命令均已在当前 `Spark` 工程执行成功，产物分别位于 `build/app/outputs/flutter-apk/app-debug.apk` 和 `build/app/outputs/bundle/release/app-release.aab`。构建目录是本地产物，不提交到 Git；产物大小会随 Flutter Engine、ABI、资源和构建模式变化，不把本机大小写成固定标准。
 
-调试签名也不等于发布签名。Android 构建系统可以用默认调试密钥生成 debug 包；发布包需要单独配置并保护签名材料，密钥和密码不得进入 Git。
+Google Play 推荐 AAB，但这不是所有 Android 分发渠道的统一规则。面向中国大陆发布时，需要逐个核对目标应用商店当时的官方包格式、签名和上架要求，不能默认 Google Play 流程等于国内渠道流程。
+
+调试签名也不等于发布签名。当前 `android/app/build.gradle.kts` 的 release 变体仍明确引用 `signingConfigs.getByName("debug")`，所以本次 AAB 成功只验证 release 编译和打包，不证明发布签名已经配置。正式发布需要单独配置并保护签名材料，密钥和密码不得进入 Git。
 
 ## 06 只读认识 `app/android/`
 
@@ -155,9 +162,44 @@ Flutter 官方发布文档给出两条构建入口：
 
 这一步只确认每类文件负责什么，不修改版本号，也不触发 Gradle Sync。
 
-## 07 看懂官方验证命令的位置
+## 07 完成 Android 验证闭环
 
-完整 Android 环境通常会用以下命令检查不同层级：
+先在 `app/` 中检查工具链和设备：
+
+```bash
+flutter doctor -v
+flutter emulators
+flutter devices
+```
+
+`flutter doctor -v` 的 Android toolchain 应通过；启动 AVD 后，`flutter devices` 至少应出现一个 platform 为 `android` 的设备。不要只看到 AVD 名称就认为设备已经运行。
+
+然后使用实际输出中的设备 ID 运行应用：
+
+```bash
+flutter run -d <device_id>
+```
+
+当前机器的 ID 是 `emulator-5554`，这是本次运行实例的临时标识，读者不能原样照抄。应用启动后确认标题为 `Spark`、计数初始为 `0`，点击右下角加号后变为 `1`。
+
+![Spark 在 Android 16 模拟器上的初始页面](../../assets/screenshots/06-android/06-spark-initial.png)
+
+![点击加号后计数变为 1](../../assets/screenshots/06-android/06-spark-counter-1.png)
+
+验证热重载时，临时把 `lib/main.dart` 的标题改为 `Spark Android`，在运行终端按 `r`。标题变化且终端出现 `Reloaded 1 of ... libraries` 后，再恢复为 `Spark` 并再次热重载。不要把临时标题留在正式源码中。
+
+最后停止调试会话，执行：
+
+```bash
+flutter analyze
+flutter test
+flutter build apk --debug
+flutter build appbundle
+```
+
+这些命令分别验证共享代码、Widget 测试、debug APK 构建和 release AAB 打包。它们不能互相替代，也不能证明发布签名或应用商店审核已经完成。
+
+各命令检查的层级如下：
 
 | 命令 | 检查对象 |
 |---|---|
@@ -166,10 +208,10 @@ Flutter 官方发布文档给出两条构建入口：
 | `flutter emulators` | Flutter 能发现的模拟器配置 |
 | `flutter devices` | Flutter 能发现的已运行模拟器或已连接设备 |
 | `flutter run -d <device_id>` | 在明确设备上运行应用 |
-| `flutter build apk` | 进入 APK 构建流程 |
+| `flutter build apk --debug` | 构建可安装的 debug APK |
 | `flutter build appbundle` | 进入 AAB 构建流程 |
 
-本篇不执行这些 Android 命令，也不提供伪造的成功输出。它们的意义是帮助你定位失败层级，而不是把所有问题都归为“Flutter 没装好”。
+本篇已实际执行除许可证交互外的上述验证命令；`flutter doctor -v` 同时确认本机许可证全部接受。命令的意义仍是定位不同层级，不要把所有失败都归为“Flutter 没装好”。
 
 ## 08 中国大陆网络环境要分清下载源
 
@@ -187,13 +229,15 @@ Flutter 官方中国网络文档列出的镜像覆盖 Flutter SDK、Flutter 构�
 
 ## 预期结果
 
-完成本篇后，你不需要得到 Android 运行画面或构建产物。正确结果是：
+完成本篇后，应该得到以下可核对结果：
 
 - 能画出 Android Studio、Flutter SDK、Android SDK、Gradle／AGP 与设备之间的关系。
 - 能指出 AVD 是配置，Emulator 是运行程序，System Image 是虚拟系统。
 - 能在 `app/android/` 中找到主要构建文件，并解释各自职责。
 - 能根据失败发生的位置区分 Flutter 镜像、SDK 下载、Gradle 下载和 Maven 依赖问题。
-- 不会把 Android 官方资料中的操作写成课程已经实际验证通过。
+- `flutter devices` 能识别一个运行中的 Android 设备。
+- `Spark` 能安装、启动，且计数交互与真实源码热重载生效。
+- debug APK 与 release AAB 构建成功，同时知道当前 AAB 仍不是正式签名发布包。
 
 ## 常见问题
 
@@ -228,8 +272,11 @@ AVD 只是配置。只有 Android Emulator 使用该配置成功启动后，Flut
 - [ ] 我能解释 AVD、Emulator 和 System Image 的关系。
 - [ ] 我能说清 Gradle、AGP、JDK 和 SDK Build-Tools 在构建链中的位置。
 - [ ] 我能区分 APK 与 AAB。
-- [ ] 我已经只读查看 `app/android/`，没有修改或运行 Android 配置。
-- [ ] 我知道本篇没有完成任何 Android 实际验证。
+- [ ] `flutter doctor -v` 的 Android toolchain 通过，许可证状态正常。
+- [ ] `flutter devices` 能识别我实际启动的 Android 设备。
+- [ ] `Spark` 能运行，计数从 `0` 变为 `1`，标题修改可以热重载并恢复。
+- [ ] `flutter analyze`、`flutter test`、debug APK 和 release AAB 构建全部通过。
+- [ ] 我知道当前 AAB 使用模板调试密钥，不能直接用于正式发布。
 
 ## 一手来源
 

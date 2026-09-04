@@ -1,6 +1,6 @@
 # 08｜用绝对路径切换上游 Flutter 与 Flutter-OH
 
-最后核验：2026-09-02
+最后核验：2026-09-04
 
 ## 本篇结论
 
@@ -8,7 +8,7 @@
 
 这样做不需要安装额外的版本管理工具，也不会让目录顺序决定构建结果。每次操作前先检查 Flutter 与 Dart 版本；版本不匹配时停止，不用另一套 SDK 继续碰运气。
 
-本篇已在本机验证上游 Flutter 3.47.2 与 Dart 3.13.2 的路径和命令。Flutter-OH SDK 尚未安装，因此涉及 Flutter-OH 的同构检查命令只依据 CPF-Flutter 官方资料给出，未在本机执行，也不代表 `Spark` 已通过 OpenHarmony 构建。
+本篇已在本机验证上游 Flutter 3.47.2 与 Dart 3.13.2 的路径和命令，并使用这条轨道完成 iOS Simulator 构建、Android 16 模拟器运行、debug APK 与 release AAB 构建。Flutter-OH SDK 尚未安装，因此涉及 Flutter-OH 的同构检查命令只依据 CPF-Flutter 官方资料给出，未在本机执行，也不代表 `Spark` 已通过 OpenHarmony 构建。
 
 ## 学完你能做到
 
@@ -45,7 +45,7 @@
 | 项目源码 | `Spark` 的 Dart 代码、资源和平台工程 | 已存在于 `app/` |
 | Track A SDK | Flutter 3.47.2 stable，配套 Dart 3.13.2 | 本机已安装并验证 |
 | Track B SDK | Flutter-OH `3.41.10-ohos-1.0.1`，基于上游 Flutter 3.41.9，配套 Dart 3.11.5 | 本机未安装 |
-| 目标平台 | 一次命令实际要运行或构建的平台 | iOS 已验证；Android 不做构建验证；OpenHarmony 尚未验证 |
+| 目标平台 | 一次命令实际要运行或构建的平台 | iOS 与 Android 已验证；OpenHarmony 尚未验证 |
 
 `flutter` 只是命令名。Shell 最终执行哪一个文件，取决于路径解析结果；它不会根据当前目录自动理解你想构建 iOS 还是 OpenHarmony。
 
@@ -140,7 +140,15 @@ iOS 构建仍然明确使用 Track A：
 "$FLUTTER_UPSTREAM_HOME/bin/flutter" build ios --simulator
 ```
 
-Android 也属于 Track A，但按本课程验证边界，不执行 Android 运行或构建命令。课程后续只依据 Flutter 与 Android 官方一手资料说明相对 iOS 的差异。
+Android 也属于 Track A。当前 `Spark` 已使用同一上游 SDK 完成：
+
+```bash
+"$FLUTTER_UPSTREAM_HOME/bin/flutter" run -d <android_device_id>
+"$FLUTTER_UPSTREAM_HOME/bin/flutter" build apk --debug
+"$FLUTTER_UPSTREAM_HOME/bin/flutter" build appbundle
+```
+
+运行结果、产物和签名边界见[第 06 课](06-android-toolchain-differences.md)。这里的 `<android_device_id>` 必须替换为 `flutter devices` 的实际输出。
 
 OpenHarmony 命令必须交给 Track B，例如：
 
@@ -213,7 +221,7 @@ VS Code、集成终端和普通终端可能在不同时间读取环境。Flutter
 
 - SDK 路径真实存在。
 - 绝对路径输出 Flutter 3.47.2 和 Dart 3.13.2。
-- `Spark` 的分析、测试与 iOS 构建命令明确来自 Track A。
+- `Spark` 的分析、测试、iOS 构建、Android 运行与 Android 构建命令明确来自 Track A。
 
 Flutter-OH 轨道当前只能得到边界结论：
 

@@ -1,10 +1,10 @@
 # 05｜用 VS Code 运行、调试和热重载 Flutter 应用
 
-最后核验：2026-08-30
+最后核验：2026-09-04
 
 ## 本篇结论
 
-VS Code 配好 Flutter 与 Dart 扩展后，可以完成设备选择、运行、断点调试、热重载和问题定位。本篇只使用已经跑通的 `Spark` iOS 工程，不安装 Android 工具链，也不引入新的项目依赖。
+VS Code 配好 Flutter 与 Dart 扩展后，可以完成设备选择、运行、断点调试、热重载和问题定位。本篇以 iOS 作为主操作平台；同一套 Flutter 运行与热重载链路也已在 Android 模拟器通过命令行实际验证，不引入新的项目依赖。
 
 ## 学完你能做到
 
@@ -28,7 +28,7 @@ VS Code 配好 Flutter 与 Dart 扩展后，可以完成设备选择、运行、
 
 `Spark` 已在上述 iOS 环境完成运行、热重载、静态分析、测试和 Simulator 构建。VS Code 的设备选择、运行、调试及热重载入口逐项对照 Flutter 与 VS Code 官方文档；本次执行环境无法代替读者操作图形界面，因此不把 F5、断点命中和 Debug Toolbar 点击写成本机自动化验证结果，读者需要按文末清单自行确认。
 
-本篇不验证 Android Studio、Android SDK、Android 模拟器或 Android 构建。第 06 课只说明它们相对 iOS 的差异，也不会写成已经运行或构建通过。
+2026-09-04 又使用同一 Flutter 3.47.2 SDK，在 Android 16（API 36）ARM64 模拟器完成 `Spark` 安装、启动、计数交互和真实源码热重载。标题从 `Spark` 临时改为 `Spark Android` 后，Flutter 报告重新载入 1 个 library；恢复标题后再次热重载成功。这里验证的是 Flutter 命令行与 Android 设备链路，不冒充 VS Code 图形界面的按钮和断点已经自动操作。Android 工具链与构建细节放在[第 06 课](06-android-toolchain-differences.md)。
 
 ## 开始前检查
 
@@ -61,13 +61,13 @@ Flutter 扩展通过工程根目录的 `pubspec.yaml` 识别项目。打开正�
 Flutter: Run Flutter Doctor
 ```
 
-VS Code 会打开 Output 面板，并在输出通道中显示 Flutter Doctor 结果。本课程当前只要求：
+VS Code 会打开 Output 面板，并在输出通道中显示 Flutter Doctor 结果。完成本篇的 iOS 主线时至少要求：
 
 - Flutter 3.47.2 可用。
 - Xcode 工具链通过。
 - 能识别 iOS Simulator。
 
-Android toolchain 出现警告不影响本篇完成，不要为了消除警告安装或修改 Android 环境。相关信息只在第 06 课作为平台差异说明。
+继续完成第 06 课的 Android 阶段门时，`Android toolchain` 也必须通过，并且 `flutter devices` 能看到明确标记为 `android` 的运行设备。不要为了消除警告盲目升级 AGP、Gradle 或 SDK，先按第 06 课定位缺失层级。
 
 ## 03 选择 iOS Simulator
 
@@ -175,7 +175,7 @@ All tests passed!
 
 ## Android 的差异
 
-Flutter 官方的 VS Code 操作入口不因目标设备改为 Android 而改变，差别主要在状态栏中选择的设备以及背后的 Android 工具链。本课程未对 Android 设备选择、运行、断点或热重载做实际验证；第 06 课只依据 Flutter 与 Android 官方资料说明工具链差异。
+Flutter 官方的 VS Code 操作入口不因目标设备改为 Android 而改变，差别主要在状态栏中选择的设备以及背后的 Android 工具链。本课程已经验证 Android 模拟器可被 Flutter 识别、`Spark` 能运行、计数交互有效且源码热重载生效；VS Code 状态栏选择、F5 断点和 Debug Toolbar 仍需读者在图形界面自行确认，不能用命令行结果替代。
 
 ## 常见问题
 
@@ -197,7 +197,7 @@ Flutter 官方的 VS Code 操作入口不因目标设备改为 Android 而改变
 
 ### Output 中出现 Android 警告
 
-本篇只要求 iOS 工具链正常。Android toolchain 警告不在本篇处理，也不因此安装或修改 Android 环境。
+如果正在完成本篇的 iOS 主线，可以先记录 Android 警告，再到第 06 课集中处理。如果已经进入 Android 阶段门，就不能忽略：运行 `flutter doctor -v`，按 Android toolchain 的具体提示检查 SDK、JDK、许可证或设备，不要把所有警告统一归因于 Flutter。
 
 ## 完成检查
 
@@ -208,6 +208,7 @@ Flutter 官方的 VS Code 操作入口不因目标设备改为 Android 而改变
 - [ ] 我能用 Debug Toolbar 热重载，并恢复 `Spark` 标题。
 - [ ] 我能区分 Problems、Debug Console 和 Terminal。
 - [ ] `flutter analyze` 与 `flutter test` 通过。
+- [ ] 进入 Android 阶段门后，我能选择 Android 设备，并理解命令行验证与 VS Code 图形操作不是同一份证据。
 
 ## 一手来源
 
